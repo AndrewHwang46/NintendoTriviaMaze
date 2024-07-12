@@ -4,9 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ac3c2932-9e32-45ff-91eb-cb0703500a57" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/Model/test" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    <list default="true" id="ac3c2932-9e32-45ff-91eb-cb0703500a57" name="Changes" comment="Testing git repo">
+      <change beforePath="$PROJECT_DIR$/src/View/Test" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -25,7 +24,7 @@
     </option>
     <option name="RECENT_BRANCH_BY_REPOSITORY">
       <map>
-        <entry key="$PROJECT_DIR$" value="main" />
+        <entry key="$PROJECT_DIR$" value="Andrew's-Branch-(keep-out)" />
       </map>
     </option>
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -49,7 +48,9 @@
   "associatedIndex": 4
 }]]></component>
   <component name="ProjectId" id="2jABQBRik1QsdDGGbMrreHPLVP5" />
-  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
@@ -60,7 +61,7 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
-    "git-widget-placeholder": "Andrew's-Branch-(keep-out)",
+    "git-widget-placeholder": "main",
     "kotlin-language-version-configured": "true",
     "node.js.detected.package.eslint": "true",
     "node.js.detected.package.tslint": "true",
@@ -89,11 +90,24 @@
       <updated>1720819984545</updated>
       <workItem from="1720819986258" duration="326000" />
       <workItem from="1720820321045" duration="452000" />
-      <workItem from="1720821283219" duration="984000" />
+      <workItem from="1720821283219" duration="1311000" />
     </task>
+    <task id="LOCAL-00001" summary="Testing git repo">
+      <option name="closed" value="true" />
+      <created>1720822530544</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1720822530544</updated>
+    </task>
+    <option name="localTasksCounter" value="2" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Testing git repo" />
+    <option name="LAST_COMMIT_MESSAGE" value="Testing git repo" />
   </component>
 </project>

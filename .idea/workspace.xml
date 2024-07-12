@@ -4,8 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="ac3c2932-9e32-45ff-91eb-cb0703500a57" name="Changes" comment="Testing git repo">
-      <change beforePath="$PROJECT_DIR$/src/View/Test" beforeDir="false" />
+    <list default="true" id="ac3c2932-9e32-45ff-91eb-cb0703500a57" name="Changes" comment="Added model, view, controller packages to repo">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -90,7 +90,7 @@
       <updated>1720819984545</updated>
       <workItem from="1720819986258" duration="326000" />
       <workItem from="1720820321045" duration="452000" />
-      <workItem from="1720821283219" duration="1311000" />
+      <workItem from="1720821283219" duration="2323000" />
     </task>
     <task id="LOCAL-00001" summary="Testing git repo">
       <option name="closed" value="true" />
@@ -100,7 +100,15 @@
       <option name="project" value="LOCAL" />
       <updated>1720822530544</updated>
     </task>
-    <option name="localTasksCounter" value="2" />
+    <task id="LOCAL-00002" summary="Added model, view, controller packages to repo">
+      <option name="closed" value="true" />
+      <created>1720822770964</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1720822770964</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -108,6 +116,7 @@
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Testing git repo" />
-    <option name="LAST_COMMIT_MESSAGE" value="Testing git repo" />
+    <MESSAGE value="Added model, view, controller packages to repo" />
+    <option name="LAST_COMMIT_MESSAGE" value="Added model, view, controller packages to repo" />
   </component>
 </project>

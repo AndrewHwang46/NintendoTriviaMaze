@@ -1,7 +1,6 @@
 package Model;
 
 import java.sql.*;
-import java.util.logging.Logger;
 
 public class Answer {
 
@@ -32,7 +31,7 @@ public class Answer {
         }
     }
 
-    public String getAnswer() {
-
-    }
+//    public String getAnswer() {
+//
+//    }
 }

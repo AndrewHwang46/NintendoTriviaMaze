@@ -32,3 +32,4 @@ bin/
 .idea/workspace.xml
 .idea/dataSources.xml
 *.xml
+.idea/workspace.xml

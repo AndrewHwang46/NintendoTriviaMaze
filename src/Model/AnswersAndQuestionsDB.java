@@ -9,10 +9,17 @@ import java.util.List;
 
 import org.sqlite.SQLiteDataSource;
 
-public final class AnswersAndQuestionsDB {
+/**
+ * AnswersAndQuestionsDB class contains the connect and the database for the
+ * trivia maze game application.
+ *
+ * @author Noah Ogilvie
+ */
+final class AnswersAndQuestionsDB {
 
-    private String myUrl;
-    //was used to test methods
+    private final String myUrl;
+
+    //was used to test methods and whether if the database works or not (it works).
 //    public static void main(String[] args) {
 //        SQLiteDataSource ds = initializeDatabase();
 //        createTables(ds);
@@ -41,7 +48,10 @@ public final class AnswersAndQuestionsDB {
 //        }
 //    }
 
-    private AnswersAndQuestionsDB() {
+    /**
+     * AnswersAndQuestionsDB() method is a constructor, initializing private fields.
+     */
+    AnswersAndQuestionsDB() {
         myUrl = "jdbc:sqlite:AnswersAndQuestions.db";
     }
 
@@ -80,7 +90,7 @@ public final class AnswersAndQuestionsDB {
                               "primary key(answerTorF))";
 
 //        String query2 = "create table if not exist imgAnswers (" +
-//                        "answer (what datatype?) not null primary key)";
+//                        "answer blob not null primary key)";
 
         final String query3 = "create table if not exists questionsMultiple (" +
                               "answer text unique not null, " +
@@ -176,10 +186,11 @@ public final class AnswersAndQuestionsDB {
                    "('Direction pad', 'Which invention was Nintendo the first to invent?')," + //14
                    "('Wii Fit Trainer', 'Who said the phrase, \"Let''s get fired up!,\" in Super Smash Bros. Ultimate?');"); //15
 
+        //Some issues arises here where only 1
         values.add("insert or ignore into `TorF` (`questions`, `answerTorF`, `notanswer`) values" +
-                "('Was Mario designed after a Washingtonian from Everett who was a Landlord', 'True', 'False')," +
-                "('In Super Smash Melee and in Super Smash Brawl, were you able to play Master Hand?', 'True', 'False')," +
-                "('Is Nintendo the oldest video game company?', 'True', 'False');");
+                   "('Was Mario designed after a Washingtonian from Everett who was a Landlord', 'True', 'False')," +
+                   "('In Super Smash Melee and in Super Smash Brawl, were you able to play Master Hand?', 'True', 'False')," +
+                   "('Is Nintendo the oldest video game company?', 'True', 'False');");
 
         return values;
     }
@@ -205,7 +216,7 @@ public final class AnswersAndQuestionsDB {
      * @param theDS     the SQLite datasource.
      */
     public final void getOriginalValues(final SQLiteDataSource theDS) {
-        insertManyQueries(theDS, originalValues());
+        insertManyQueries(theDS, new ArrayList<String>(originalValues()));
     }
 
     /**
@@ -221,6 +232,6 @@ public final class AnswersAndQuestionsDB {
      * @return the list of the original values.
      */
     public final List<String> getValues() {
-        return originalValues();
+        return new ArrayList<String>(originalValues());
     }
 }

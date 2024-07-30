@@ -12,6 +12,10 @@ import org.sqlite.SQLiteDataSource;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
 
+/**
+ *
+ * @author Noah Ogilvie
+ */
 public final class AnswerAndQuestionsDBTest {
 
     private List<String> myValues;
@@ -28,9 +32,10 @@ public final class AnswerAndQuestionsDBTest {
 
     //Need to delete? ask team members
     @Test
-    public void initializeDatabaseTest() throws SQLException{
+    public void initializeDatabaseTest() throws SQLException {
         SQLiteDataSource db = myDatabase.getDataSource();
-        assertEquals(db.getConnection(), myDataSource.getConnection());
+        //same url, but is it better to do getConnection()?
+        assertEquals(db.getUrl(), myDataSource.getUrl());
     }
 
     @Test

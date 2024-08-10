@@ -1,31 +1,27 @@
 package Model;
 
-import java.util.ArrayList;
+import java.io.Serializable;
+import java.util.Random;
 
-public class Room {
-    private Door myDoor;
+public class Room implements Serializable {
     private boolean myRoomMovement;
-    private final Door[] myArrayOfDoors;
+    private final AbstractDoor[] myArrayOfDoors;
     private final int myMaxRoom = 4;
+    private final Random myRandom = new Random();
 
 
     //Currently an empty constructor
-    public Room (Door theDoor) {
+    public Room (AbstractDoor theDoor) {
         myRoomMovement = true;
-        myDoor = theDoor;
-        myArrayOfDoors = new Door[myMaxRoom];
+
+        myArrayOfDoors = new AbstractDoor[myMaxRoom];
         for (int i = 0; i < myMaxRoom; i++) {
-            myArrayOfDoors[i] = new Door();
+            int randomDoor = myRandom.nextInt(myMaxRoom);
+
+            myArrayOfDoors[i] = new TrueOrFalseDoor();
         }
     }
 
-    public Door getDoor() {
-        return myDoor;
-    }
-
-    public void setDoor(Door theDoor){
-        myDoor = theDoor;
-    }
 
     public boolean getRoomMovement() {
         return myRoomMovement;
@@ -36,7 +32,7 @@ public class Room {
     }
 
     public void movementAvalible() {
-        for (Door myArrayOfDoor : myArrayOfDoors) {
+        for (AbstractDoor myArrayOfDoor : myArrayOfDoors) {
             if (!myArrayOfDoor.getStateOfDoor()) {
                 myRoomMovement = false;
             }else {
@@ -47,7 +43,7 @@ public class Room {
 
     }
 
-    public void setMyArrayOfDoors(Door[] theArrayOfDoors) {
+    public void setMyArrayOfDoors(AbstractDoor[] theArrayOfDoors) {
         if (theArrayOfDoors.length != myMaxRoom) {
             throw new IllegalArgumentException("Doors do not have the same length");
         }
@@ -55,6 +51,7 @@ public class Room {
             myArrayOfDoors[i] = theArrayOfDoors[i];
         }
     }
+
 
 
 }

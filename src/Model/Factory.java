@@ -14,18 +14,15 @@ import org.sqlite.SQLiteDataSource;
  */
 public final class Factory {
 
-    private SQLiteDataSource myDataSource;
-    private AnswersAndQuestionsDB myDatabase;
-    private List<MultipleQNADoors> myMultipleQNADoors;
-    private List<TrueOrFalseDoors> myTrueOrFalseDoors;
+    private final SQLiteDataSource myDataSource;
+    private final List<AbstractDoor> myListOfDoors;
 
     public Factory() {
-        myDatabase = new AnswersAndQuestionsDB();
-        myDataSource = myDatabase.getDataSource();
-        myDatabase.getOriginalTables(myDataSource);
-        myDatabase.getOriginalValues(myDataSource);
-        myMultipleQNADoors = new ArrayList<MultipleQNADoors>();
-        myTrueOrFalseDoors = new ArrayList<TrueOrFalseDoors>();
+        AnswersAndQuestionsDB myDatabase = new AnswersAndQuestionsDB();
+        this.myDataSource = myDatabase.getDataSource();
+        myDatabase.getOriginalTables(this.myDataSource);
+        myDatabase.getOriginalValues(this.myDataSource);
+        this.myListOfDoors = new ArrayList<>();
     }
 
     private final void createMultipleQNADoors() {
@@ -33,7 +30,7 @@ public final class Factory {
                              "from answersMultiple as am" +
                              "join questionsMultiple as qm on am.answer = qm.answer;";
 
-        try (Connection conn = myDataSource.getConnection();
+        try (Connection conn = this.myDataSource.getConnection();
              Statement stmt = conn.createStatement(); ) {
 
             ResultSet rs = stmt.executeQuery(query);
@@ -52,9 +49,9 @@ public final class Factory {
                 notanswer.add(not2);
                 notanswer.add(not3);
 
-                MultipleQNADoors temp = new MultipleQNADoors(answer, prompt, notanswer);
+                MultipleQNADoor temp = new MultipleQNADoor(answer, prompt, notanswer);
 
-                myMultipleQNADoors.add(temp);
+                this.myListOfDoors.add(temp);
             }
         } catch (final SQLException e) {
             e.printStackTrace();
@@ -65,7 +62,7 @@ public final class Factory {
         final String query = "select *" +
                              "from TorF;";
 
-        try (Connection conn = myDataSource.getConnection();
+        try (Connection conn = this.myDataSource.getConnection();
              Statement stmt = conn.createStatement(); ) {
 
             ResultSet rs = stmt.executeQuery(query);
@@ -76,22 +73,18 @@ public final class Factory {
                 String answer = rs.getString("answerTorF");
                 String not1 = rs.getString("notanswer");
 
-                TrueOrFalseDoors temp = new TrueOrFalseDoors(answer, questions, not1);
+                TrueOrFalseDoor temp = new TrueOrFalseDoor(answer, questions, not1);
 
-                myTrueOrFalseDoors.add(temp);
+                this.myListOfDoors.add(temp);
             }
         } catch (final SQLException e) {
             e.printStackTrace();
         }
     }
 
-    public final List<MultipleQNADoors> getMultipleQNADoors() {
+    public final List<AbstractDoor> getListOfDoors() {
         createMultipleQNADoors();
-        return new ArrayList<MultipleQNADoors>(myMultipleQNADoors);
-    }
-
-    public final List<TrueOrFalseDoors> getTrueOrFalseDoors() {
         createTrueOrFalseDoors();
-        return new ArrayList<TrueOrFalseDoors>(myTrueOrFalseDoors);
+        return new ArrayList<>(this.myListOfDoors);
     }
 }

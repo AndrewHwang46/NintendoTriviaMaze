@@ -1,30 +1,37 @@
 package Model;
 
 import java.io.Serializable;
+import java.util.ArrayDeque;
 import java.util.ArrayList;
+import java.util.Queue;
 import java.util.Random;
 
 public class Room implements Serializable {
     private boolean myRoomMovement;
-    private final Factory myFactory = new Factory();
+    private final Factory myFactory;
     private static final int MAX_ROOM = 4;
     private final Random myRandom = new Random();
-    private AbstractDoor[] myDoorInRoomList = new AbstractDoor[MAX_ROOM-1];
-    private ArrayList<AbstractDoor> myDoorTotalList = new ArrayList<>();
+    private AbstractDoor[] myDoorInRoomList;
+    private ArrayList<AbstractDoor> myDoorTotalList;
+    private QuestionsList myUnusedQuestionsList = new QuestionsList();
 
 
     //Currently an empty constructor
     public Room () {
         myRoomMovement = true;
+        myFactory = new Factory();
+        myDoorInRoomList = new AbstractDoor[MAX_ROOM-1];
         myDoorTotalList = new ArrayList<>(myFactory.getListOfDoors());
 
     }
 
     public void setRandomDoorInRoom() {
         for (int i = 0; i < MAX_ROOM-1; i++) {
-            int index = myRandom.nextInt(myDoorTotalList.size()-1);
-            myDoorInRoomList[i] = myDoorTotalList.get(index);
-            myDoorTotalList.remove(index);
+            if (myUnusedQuestionsList.getListSize() != 0) {
+                int index = myRandom.nextInt(myUnusedQuestionsList.getListSize()-1);
+                myDoorInRoomList[i] = myUnusedQuestionsList.getUsedQuestion(index);
+                myUnusedQuestionsList.removeDuplicates(index);
+            }
         }
 
     }

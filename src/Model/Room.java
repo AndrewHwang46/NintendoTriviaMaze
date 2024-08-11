@@ -6,7 +6,7 @@ import java.util.Random;
 
 public class Room implements Serializable {
     private boolean myRoomMovement;
-    private final Factory myFactory;
+    private final Factory myFactory = new Factory();
     private static final int MAX_ROOM = 4;
     private final Random myRandom = new Random();
     private AbstractDoor[] myDoorInRoomList = new AbstractDoor[MAX_ROOM-1];
@@ -14,16 +14,15 @@ public class Room implements Serializable {
 
 
     //Currently an empty constructor
-    public Room (Factory theFactory) {
+    public Room () {
         myRoomMovement = true;
-        myFactory = theFactory;
         myDoorTotalList = new ArrayList<>(myFactory.getListOfDoors());
 
     }
 
     public void setRandomDoorInRoom() {
         for (int i = 0; i < MAX_ROOM-1; i++) {
-            int index = myRandom.nextInt(myDoorTotalList.size());
+            int index = myRandom.nextInt(myDoorTotalList.size()-1);
             myDoorInRoomList[i] = myDoorTotalList.get(index);
             myDoorTotalList.remove(index);
         }

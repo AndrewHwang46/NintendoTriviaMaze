@@ -59,7 +59,7 @@ public class Maze implements Serializable {
                 for (int col = 0; col < myNumberOfColumns; col++) {
                     char roomType = line.charAt(col);
                     if (roomType != '0') {  // Assuming '0' represents an empty space
-                        myMap[row][col] = new Room(myFactory);
+                        myMap[row][col] = new Room();
                         myMap[row][col].setRandomDoorInRoom();
                     }
                 }

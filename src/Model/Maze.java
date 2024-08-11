@@ -1,22 +1,25 @@
 package Model;
 
 import java.io.FileNotFoundException;
+import java.io.Serializable;
 import java.util.Scanner;
 
 import java.io.InputStream;
 
-public class Maze {
+public class Maze implements Serializable {
     private static Maze myMazeSingleton;
 
     private static final int COLUMN_SIZE = 80;
 
     private static final int ROW_SIZE = 72;
 
-    private int[][] myMap;
+    private Room[][] myMap;
 
     private int myNumberOfColumns;
 
     private int myNumberOfRows;
+
+    private Factory myFactory;
 
 
     public Maze(String theFileName) {
@@ -49,12 +52,16 @@ public class Maze {
             scanner = new Scanner(inputStream);
 
 
-            myMap = new int[myNumberOfRows][myNumberOfColumns];
+            myMap = new Room[myNumberOfRows][myNumberOfColumns];
 
             for (int row = 0; row < myNumberOfRows; row++) {
                 String line = scanner.nextLine().trim();
                 for (int col = 0; col < myNumberOfColumns; col++) {
-                    myMap[row][col] = Character.getNumericValue(line.charAt(col));
+                    char roomType = line.charAt(col);
+                    if (roomType != '0') {  // Assuming '0' represents an empty space
+                        myMap[row][col] = new Room(myFactory);
+                        myMap[row][col].setRandomDoorInRoom();
+                    }
                 }
             }
 

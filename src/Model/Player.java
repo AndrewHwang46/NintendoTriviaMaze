@@ -1,48 +1,35 @@
 package Model;
 
+import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
+import java.io.Serializable;
 
-public class Player {
+public class Player implements Serializable{
+    private static Player myPlayerSingleton;
 
-     private int myX;
+    private int myX;
 
-     private int myY;
+    private int myY;
 
-     private int myLife = 3;
+    private int myScore;
 
-     private int myScore;
+    private boolean myWin;
 
-     private boolean myWin;
+    private PropertyChangeSupport myPCS = new PropertyChangeSupport(this);
 
-     private PropertyChangeSupport myPCS = new PropertyChangeSupport(this);
+    public Player() {
+        myX = GameSettings.SCREEN_WIDTH/2 - (GameSettings.TILE_SIZE/2);
+        myY = GameSettings.SCREEN_HEIGHT/2 - (GameSettings.TILE_SIZE/2);
+        myScore = 0;
+        myWin = false;
+    }
 
-     public Player() {
-         myX = GameSettings.SCREEN_WIDTH/2 - (GameSettings.TILE_SIZE/2);
-         myY = GameSettings.SCREEN_HEIGHT/2 - (GameSettings.TILE_SIZE/2);
-         myScore = 0;
-         myWin = false;
-     }
-
-     public int getX() {
+    public int getX() {
          return myX;
      }
 
      public int getY() {
          return myY;
-     }
-
-     public int getLife() {
-         return myLife;
-     }
-
-     public void setLife(int life) {
-         myLife = life;
-     }
-
-     public void damageTaken () {
-         if (myLife > 0) {
-             myLife--;
-         }
      }
 
      public void scoreChanger(boolean theCorrectAnswer) {
@@ -54,6 +41,17 @@ public class Player {
 
 
      }
+
+     public static synchronized Player getInstance() {
+        if(myPlayerSingleton == null) {
+            myPlayerSingleton = new Player();
+        }
+        return myPlayerSingleton;
+     }
+
+    public static synchronized void resetPlayer() {
+        myPlayerSingleton = new Player();
+    }
 
      public int getMyScore() {
          return myScore;
@@ -69,5 +67,13 @@ public class Player {
 
      public void scoreFirePropertyChanger() {
          myPCS.firePropertyChange("score", null, myScore);
+     }
+
+     public boolean getWin() {
+        return myWin;
+     }
+
+     public void setWin(boolean theWin) {
+        myWin = theWin;
      }
 }

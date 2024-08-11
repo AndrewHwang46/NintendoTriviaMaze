@@ -59,6 +59,10 @@ public class Room implements Serializable {
         }
     }
 
+    public AbstractDoor[] getMyDoorInRoomList() {
+        return myDoorInRoomList;
+    }
+
     @Override
     public String toString() {
         StringBuilder roomString = new StringBuilder();

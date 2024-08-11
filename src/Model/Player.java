@@ -1,17 +1,26 @@
 package Model;
 
+import java.beans.PropertyChangeSupport;
+
 public class Player {
+
      private int myX;
+
      private int myY;
-     private int myLife;
-     private int myMovementSpeed;
+
+     private int myLife = 3;
+
      private int myScore;
 
-     public Player(int x, int y) {
-         myX = x;
-         myY = y;
-         myLife = 3;
-         myMovementSpeed = 5;
+     private boolean myWin;
+
+     private PropertyChangeSupport myPCS = new PropertyChangeSupport(this);
+
+     public Player() {
+         myX = GameSettings.SCREEN_WIDTH/2 - (GameSettings.TILE_SIZE/2);
+         myY = GameSettings.SCREEN_HEIGHT/2 - (GameSettings.TILE_SIZE/2);
+         myScore = 0;
+         myWin = false;
      }
 
      public int getX() {
@@ -30,14 +39,20 @@ public class Player {
          myLife = life;
      }
 
-     public void damageTaken (boolean theAnswer) {
-         if (!theAnswer) {
-             myLife = 1;
+     public void damageTaken () {
+         if (myLife > 0) {
+             myLife--;
          }
      }
 
-     public int getMovementSpeed() {
-         return myMovementSpeed;
+     public void scoreChanger(boolean theCorrectAnswer) {
+         if (theCorrectAnswer) {
+             myScore =+ 100;
+         }else {
+             myScore =- 100;
+         }
+
+
      }
 
      public int getMyScore() {
@@ -48,12 +63,11 @@ public class Player {
          this.myScore = myScore;
      }
 
+     public PropertyChangeSupport getPCS() {
+         return myPCS;
+     }
 
-
-
-
-
-
-
-
+     public void scoreFirePropertyChanger() {
+         myPCS.firePropertyChange("score", null, myScore);
+     }
 }

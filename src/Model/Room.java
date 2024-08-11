@@ -66,7 +66,12 @@ public class Room implements Serializable {
     @Override
     public String toString() {
         StringBuilder roomString = new StringBuilder();
-
+        for(int i = 0; i < MAX_ROOM; i++) {
+            roomString.append(i).append("=").append(myDoorTotalList.get(i))
+                    .append(myDoorInRoomList[i].getUserAttempted())
+                    .append(myDoorInRoomList[i].getStateOfDoor());
+        }
+        return roomString.toString();
     }
 
 }

@@ -1,27 +1,34 @@
 package Model;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Random;
 
 public class Room implements Serializable {
     private boolean myRoomMovement;
-    private final AbstractDoor[] myArrayOfDoors;
-    private final int myMaxRoom = 4;
+    private final Factory myFactory;
+    private static final int MAX_ROOM = 4;
     private final Random myRandom = new Random();
+    private AbstractDoor[] myDoorInRoomList = new AbstractDoor[MAX_ROOM-1];
+    private ArrayList<AbstractDoor> myDoorTotalList = new ArrayList<>();
 
 
     //Currently an empty constructor
-    public Room (AbstractDoor theDoor) {
+    public Room (Factory theFactory) {
         myRoomMovement = true;
+        myFactory = theFactory;
+        myDoorTotalList = new ArrayList<>(myFactory.getListOfDoors());
 
-        myArrayOfDoors = new AbstractDoor[myMaxRoom];
-        for (int i = 0; i < myMaxRoom; i++) {
-            int randomDoor = myRandom.nextInt(myMaxRoom);
-
-            myArrayOfDoors[i] = new TrueOrFalseDoor();
-        }
     }
 
+    public void setRandomDoorInRoom() {
+        for (int i = 0; i < MAX_ROOM-1; i++) {
+            int index = myRandom.nextInt(myDoorTotalList.size());
+            myDoorInRoomList[i] = myDoorTotalList.get(index);
+            myDoorTotalList.remove(index);
+        }
+
+    }
 
     public boolean getRoomMovement() {
         return myRoomMovement;
@@ -32,7 +39,7 @@ public class Room implements Serializable {
     }
 
     public void movementAvalible() {
-        for (AbstractDoor myArrayOfDoor : myArrayOfDoors) {
+        for (AbstractDoor myArrayOfDoor : myDoorTotalList) {
             if (!myArrayOfDoor.getStateOfDoor()) {
                 myRoomMovement = false;
             }else {
@@ -44,14 +51,18 @@ public class Room implements Serializable {
     }
 
     public void setMyArrayOfDoors(AbstractDoor[] theArrayOfDoors) {
-        if (theArrayOfDoors.length != myMaxRoom) {
+        if (theArrayOfDoors.length != MAX_ROOM) {
             throw new IllegalArgumentException("Doors do not have the same length");
         }
         for (int i = 0; i < theArrayOfDoors.length; i++) {
-            myArrayOfDoors[i] = theArrayOfDoors[i];
+            myDoorTotalList.set(i, theArrayOfDoors[i]);
         }
     }
 
+    @Override
+    public String toString() {
+        StringBuilder roomString = new StringBuilder();
 
+    }
 
 }

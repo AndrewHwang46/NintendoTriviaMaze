@@ -6,10 +6,16 @@ import java.util.Scanner;
 import java.io.InputStream;
 
 public class Maze {
+    private static Maze myMazeSingleton;
+
     private static final int COLUMN_SIZE = 80;
+
     private static final int ROW_SIZE = 72;
+
     private int[][] myMap;
+
     private int myNumberOfColumns;
+
     private int myNumberOfRows;
 
 
@@ -17,8 +23,6 @@ public class Maze {
         myNumberOfColumns = COLUMN_SIZE;
         myNumberOfRows = ROW_SIZE;
         loadMaze(theFileName);
-
-
     }
 
     public void loadMaze(String theFileName) {
@@ -61,7 +65,9 @@ public class Maze {
         }
     }
 
-
+    public static synchronized void resetMaze(String theFileName) {
+        myMazeSingleton = new Maze(theFileName);
+    }
 
     public int getMyNumberOfColumns() {
         return myNumberOfColumns;
@@ -77,6 +83,17 @@ public class Maze {
 
     public void setMyNumberOfRows(int myNumberOfRows) {
         this.myNumberOfRows = myNumberOfRows;
+    }
+
+    public static synchronized Maze getMazeSingleton(String theFileName) {
+        if (myMazeSingleton == null) {
+            myMazeSingleton = new Maze(theFileName);
+        }
+        return myMazeSingleton;
+    }
+
+    public static synchronized void setMazeSingleton(Maze theMazeSingleton) {
+        myMazeSingleton = theMazeSingleton;
     }
 
 

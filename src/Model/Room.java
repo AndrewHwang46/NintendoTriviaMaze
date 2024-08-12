@@ -20,13 +20,13 @@ public class Room implements Serializable {
     public Room () {
         myRoomMovement = true;
         myFactory = new Factory();
-        myDoorInRoomList = new AbstractDoor[MAX_ROOM-1];
+        myDoorInRoomList = new AbstractDoor[MAX_ROOM];
         myDoorTotalList = new ArrayList<>(myFactory.getListOfDoors());
 
     }
 
     public void setRandomDoorInRoom() {
-        for (int i = 0; i < MAX_ROOM-1; i++) {
+        for (int i = 0; i < MAX_ROOM; i++) {
             if (myUnusedQuestionsList.getListSize() != 0) {
                 int index = myRandom.nextInt(myUnusedQuestionsList.getListSize()-1);
                 myDoorInRoomList[i] = myUnusedQuestionsList.getUsedQuestion(index);

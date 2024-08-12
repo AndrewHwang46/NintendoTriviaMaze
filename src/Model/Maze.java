@@ -7,6 +7,7 @@ import java.util.Scanner;
 import java.io.InputStream;
 
 public class Maze implements Serializable {
+
     private static Maze myMazeSingleton;
 
     private static final int COLUMN_SIZE = 80;
@@ -18,8 +19,6 @@ public class Maze implements Serializable {
     private int myNumberOfColumns;
 
     private int myNumberOfRows;
-
-    private Factory myFactory;
 
 
     public Maze(String theFileName) {
@@ -70,6 +69,29 @@ public class Maze implements Serializable {
             System.err.println("Error loading maze: " + e.getMessage());
             throw new RuntimeException("Failed to load maze", e);
         }
+    }
+
+    public Room[][] getMyMap() {
+        return myMap;
+    }
+
+
+    void mazeInstantiate() {
+        for (int i = 0; i < getMyMazeRows(); i++) {
+            for (int j = 0; j < getMyMazeCols(); j++) {
+                myMap[i][j] = new Room();
+            }
+        }
+    }
+
+
+
+    public int getMyMazeRows() {
+        return myMap.length;
+    }
+
+    public int getMyMazeCols() {
+        return myMap[0].length;
     }
 
     public static synchronized void resetMaze(String theFileName) {

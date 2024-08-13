@@ -20,6 +20,12 @@ public class Maze implements Serializable {
 
     private int myNumberOfRows;
 
+    public Maze(int theColumns, int theRows) {
+        myNumberOfColumns = theColumns;
+        myNumberOfRows = theRows;
+        mazeInstantiate();
+    }
+
 
     public Maze(String theFileName) {
         myNumberOfColumns = COLUMN_SIZE;
@@ -75,14 +81,14 @@ public class Maze implements Serializable {
         return myMap;
     }
 
-
-    void mazeInstantiate() {
+    public void mazeInstantiate() {
         for (int i = 0; i < getMyMazeRows(); i++) {
             for (int j = 0; j < getMyMazeCols(); j++) {
                 myMap[i][j] = new Room();
             }
         }
     }
+
 
 
 

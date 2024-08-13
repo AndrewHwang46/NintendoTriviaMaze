@@ -1,7 +1,7 @@
 /*
  * Nintendo Trivia Maze Game
  */
-package model;
+package Model;
 
 import java.io.Serializable;
 import java.sql.Connection;

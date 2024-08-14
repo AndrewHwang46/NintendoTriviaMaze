@@ -13,6 +13,9 @@ public abstract class AbstractDoor implements Serializable {
     private boolean myUserAttempt;
     private boolean myLockedDoor;
 
+
+    //Changed Something
+
     protected AbstractDoor(final String theAnswer,
                            final String theQuestion) {
         myUserAttempt = false;

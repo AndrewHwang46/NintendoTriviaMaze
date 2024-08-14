@@ -31,8 +31,8 @@ public class GameFrame extends JFrame {
         pack();
         setLocationRelativeTo(null);
         setVisible(true);
-//        myGameSaveLoad
-        myGamePanel.musicBackground(0);
+//      myGameSaveLoad
+//      myGamePanel.musicBackground(0);
 
 
 
@@ -72,8 +72,8 @@ public class GameFrame extends JFrame {
     }
     private void menuBarListener() {
         myExitItem.addActionListener(theEvent -> showDialog(new ExitPanel()));
-        mySaveItem.addActionListener(e -> GameSaveAndLoad.saveGame());
-        myLoadItem.addActionListener(e -> GameSaveAndLoad.loadGame());
+//        mySaveItem.addActionListener(e -> GameSaveAndLoad.saveGame());
+//        myLoadItem.addActionListener(e -> GameSaveAndLoad.loadGame());
     }
     class ExitPanel extends JPanel {
         public ExitPanel() {

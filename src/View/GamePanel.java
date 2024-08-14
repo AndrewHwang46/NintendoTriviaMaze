@@ -11,20 +11,13 @@ public class GamePanel extends JPanel implements Runnable {
     @Override
     public void run() {
         double drawInterval = (double) 1000000000 / GameSettings.FPS;
-        // 0.0166 seconds
         double nextDrawTime = System.nanoTime() + drawInterval;
-        long lastUpdateTime = System.currentTimeMillis();
-
         while (myGameThread != null) {
             update();
 
             repaint();
 
             long currentTime = System.currentTimeMillis();
-            if (currentTime - lastUpdateTime >= 3000) {
-                myHotBar.updateGUI(myGame.getMyPlayer(),this);
-                lastUpdateTime = currentTime;
-            }
 
             try {
                 double remainingTime = nextDrawTime - System.nanoTime();

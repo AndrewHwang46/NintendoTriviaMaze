@@ -40,7 +40,7 @@ public class GameFrame extends JFrame {
     public void endPanel(){
 
     }
-    public GamePanel
+
     private void showDialog(final JPanel thePanel) {
         JDialog dialog = new JDialog(this, "Dialog", true);
         dialog.getContentPane().add(thePanel);

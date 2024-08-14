@@ -1,6 +1,8 @@
 package Model;
 
+import javax.imageio.ImageIO;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.io.Serializable;
 import java.util.Scanner;
 
@@ -19,6 +21,7 @@ public class Maze implements Serializable {
     private int myNumberOfColumns;
 
     private int myNumberOfRows;
+    private Tiles[] myTile;
 
     public Maze(int theColumns, int theRows) {
         myNumberOfColumns = theColumns;
@@ -86,6 +89,23 @@ public class Maze implements Serializable {
             for (int j = 0; j < getMyMazeCols(); j++) {
                 myMap[i][j] = new Room();
             }
+        }
+    }
+                                                //FINISH TILES
+    public void getTileImage() {
+        for (int i = 0; i < 16; i++) {
+            myTile[i] = new Tiles();
+        }
+        try {
+            myTile[0].setTileImage(ImageIO.read(getClass().getResourceAsStream("View/Sprites/Tiles/Beige.png")));
+            myTile[0].setMyCollision(true);
+            myTile[1].setTileImage(ImageIO.read(getClass().getResourceAsStream("View/Sprites/Tiles/Brown.png")));
+            myTile[2].setMyTileImage(ImageIO.read(getClass().getResourceAsStream("/res/tiles/bottom_wallV3.png")));
+//          myTile[3].setMyTileImage(ImageIO.read());
+
+
+        } catch (IOException e) {
+            e.printStackTrace();
         }
     }
 

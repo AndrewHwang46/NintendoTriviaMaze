@@ -12,7 +12,8 @@ public class GameFrame extends JFrame {
     private JMenuItem myLoadItem;
     private JMenuItem myExitItem;
     private JButton myResumeButton;
-    public GamePanel myGamePanel;
+    public GameSaveAndLoad myGameSaveLoad;
+    GamePanel myGamePanel;
 
     private static final int BORDER= 15;
 
@@ -30,7 +31,7 @@ public class GameFrame extends JFrame {
         pack();
         setLocationRelativeTo(null);
         setVisible(true);
-        myGamePanel = new GamePanel();
+//        myGameSaveLoad
         myGamePanel.musicBackground(0);
 
 
@@ -71,8 +72,8 @@ public class GameFrame extends JFrame {
     }
     private void menuBarListener() {
         myExitItem.addActionListener(theEvent -> showDialog(new ExitPanel()));
-        mySaveItem.addActionListener(e -> myGamePanel.saveGame());
-        myLoadItem.addActionListener(e -> myGamePanel.loadGame());
+        mySaveItem.addActionListener(e -> GameSaveAndLoad.saveGame());
+        myLoadItem.addActionListener(e -> GameSaveAndLoad.loadGame());
     }
     class ExitPanel extends JPanel {
         public ExitPanel() {

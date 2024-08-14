@@ -4,7 +4,7 @@ package Model;
  *
  * @author Noah Ogilvie
  */
-public abstract class AbstractDoors implements Doors {
+public abstract class AbstractDoors {
 
     private final String myAnswer;
     private final String myQuestion;

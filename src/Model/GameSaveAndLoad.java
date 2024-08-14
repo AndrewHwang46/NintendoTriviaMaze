@@ -27,7 +27,7 @@ public final class GameSaveAndLoad {
         this.myPlayer = new Player();
     }
 
-    public final void saveGame() {
+    public static final void saveGame() {
         try (FileOutputStream savingFile = new FileOutputStream(FILE_NAME);
              ObjectOutputStream out = new ObjectOutputStream(savingFile); ) {
             out.writeObject(myMaze);
@@ -37,7 +37,7 @@ public final class GameSaveAndLoad {
         }
     }
 
-    public final void loadGame() {
+    public static final void loadGame() {
         try (FileInputStream loadingFile = new FileInputStream(FILE_NAME);
              ObjectInputStream in = new ObjectInputStream(loadingFile); ) {
             myMaze = (Maze) in.readObject();

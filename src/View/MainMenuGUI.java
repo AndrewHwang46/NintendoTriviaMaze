@@ -57,6 +57,7 @@ public class MainMenuGUI extends JFrame implements ActionListener {
         }
     }
 
+
     public static void main(String[] args) {
         SwingUtilities.invokeLater(() -> {
             MainMenuGUI menu = new MainMenuGUI();

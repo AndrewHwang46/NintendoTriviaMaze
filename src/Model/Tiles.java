@@ -19,6 +19,10 @@ public class Tiles {
 
     }
 
+    public void setMyTileImage(BufferedImage myTileImage) {
+        this.myTileImage = myTileImage;
+    }
+
     public boolean isMyCollision() {
         return myCollision;
     }

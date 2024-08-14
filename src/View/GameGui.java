@@ -3,6 +3,12 @@ package View;
 
 import javax.swing.*;
 import java.awt.*;
+
+/*
+
+Was early proto.
+
+ */
 public class GameGui extends JFrame {
     private JPanel mazePanel;
     private JPanel questionPanel;

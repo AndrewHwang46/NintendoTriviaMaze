@@ -1,79 +1,55 @@
 package View;
 
-import javax.sound.sampled.*;
-import java.io.File;
-import java.io.IOException;
-import java.util.HashMap;
+import javax.sound.sampled.AudioInputStream;
+import javax.sound.sampled.AudioSystem;
+import javax.sound.sampled.Clip;
+import java.io.BufferedInputStream;
+import java.io.InputStream;
 import java.util.Map;
 
 public class SoundManager {
     private Map<String, Clip> sounds;
     private float volume = 1.0f;
+    private Clip myClip;
+    private final String[] mySounds;
+
 
     public SoundManager() {
-        sounds = new HashMap<>();
+        mySounds= new String[1];
+        mySounds[0] = "View/Music/Rolling_Down_the_Street,_in_My_Katamari.mp3";
+
     }
 
-    public void loadSound(String name, String filePath) {
+    public void setFile(final int theFile) {
         try {
-            File soundFile = new File(filePath);
-            AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(soundFile);
-            Clip clip = AudioSystem.getClip();
-            clip.open(audioInputStream);
-            sounds.put(name, clip);
-        } catch (UnsupportedAudioFileException | IOException | LineUnavailableException e) {
+            InputStream is = getClass().getResourceAsStream(mySounds[theFile]);
+            AudioInputStream ais = AudioSystem.getAudioInputStream(new BufferedInputStream(is));
+            myClip = AudioSystem.getClip();
+            myClip.open(ais);
+        } catch (Exception e) {
+            System.out.println("Not found");
             e.printStackTrace();
         }
     }
 
-    public void playSound(String name) {
-        Clip clip = sounds.get(name);
-        if (clip != null) {
-            clip.setFramePosition(0);
-            clip.start();
-        }
+    /**
+     * Starts playing the audio clip.
+     */
+    public void play() {
+        myClip.start();
     }
 
-    public void loopSound(String name, int count) {
-        Clip clip = sounds.get(name);
-        if (clip != null) {
-            clip.setFramePosition(0);
-            clip.loop(count);
-        }
+    /**
+     * Starts playing the audio clip in a loop.
+     */
+    public void loop() {
+        myClip.loop(Clip.LOOP_CONTINUOUSLY);
     }
 
-    public void stopSound(String name) {
-        Clip clip = sounds.get(name);
-        if (clip != null && clip.isRunning()) {
-            clip.stop();
-        }
-    }
-
-    public void stopAllSounds() {
-        for (Clip clip : sounds.values()) {
-            if (clip.isRunning()) {
-                clip.stop();
-            }
-        }
-    }
-
-    public void setVolume(float volume) {
-        this.volume = volume;
-        for (Clip clip : sounds.values()) {
-            FloatControl gainControl = (FloatControl) clip.getControl(FloatControl.Type.MASTER_GAIN);
-            float dB = (float) (Math.log(volume) / Math.log(10.0) * 20.0);
-            gainControl.setValue(dB);
-        }
-    }
-
-    public float getVolume() {
-        return volume;
-    }
-
-    public void dispose() {
-        for (Clip clip : sounds.values()) {
-            clip.close();
-        }
-        sounds.clear();
+    /**
+     * Stops the audio clip.
+     */
+    public void stop() {
+        myClip.stop();
     }
 }

@@ -48,7 +48,6 @@ final class FactoryTest {
         this.myDoorsList = new ArrayList<>(myFactory.getListOfDoors());
 
         this.myDataSource = myDatabase.getDataSource();
-        this.myDataSource = myDatabase.getDataSource();
         myDatabase.getOriginalTables(this.myDataSource);
         myDatabase.getOriginalValues(this.myDataSource);
     }

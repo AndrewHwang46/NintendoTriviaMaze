@@ -21,7 +21,6 @@ public final class AnswerAndQuestionsDBTest {
     @BeforeEach
     void setup() {
         AnswersAndQuestionsDB database = new AnswersAndQuestionsDB();
-        //use getDataSource();
         this.myDataSource = new SQLiteDataSource();
         database.getOriginalTables(this.myDataSource);
         database.getOriginalValues(this.myDataSource);
@@ -29,17 +28,16 @@ public final class AnswerAndQuestionsDBTest {
 
     @Test
     public void databaseValueTestMultipleQNADoors() {
-        AnswersAndQuestionsDB database = new AnswersAndQuestionsDB();
-        this.myDataSource = new SQLiteDataSource();
-        database.getOriginalTables(this.myDataSource);
-        database.getOriginalValues(this.myDataSource);
 
         final String expected = "";
+
+//        final String query = "select am.answer, am.not1, am.not2, am.not3, qm.prompt " +
+//                             "from answersMultiple as am " +
+//                             "join questionsMultiple as qm on am.answer = qm.answer;";
 
         final String query = "select am.answer, am.not1, am.not2, am.not3, qm.prompt " +
                              "from answersMultiple as am " +
                              "join questionsMultiple as qm on am.answer = qm.answer;";
-
         StringBuilder sb = new StringBuilder();
 
         try (Connection conn = this.myDataSource.getConnection();
@@ -66,7 +64,7 @@ public final class AnswerAndQuestionsDBTest {
             //System.out.println("Unable fetch multiple QNA: " + e.getMessage() + e.getErrorCode());
             e.printStackTrace();
         }
-        System.out.println(sb.toString());
+        System.out.println(sb);
     }
 
     @Test

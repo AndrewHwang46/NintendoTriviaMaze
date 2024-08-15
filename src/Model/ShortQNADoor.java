@@ -10,8 +10,9 @@ package Model;
  * a separate door that holds features of short questions with answer inputs options.
  *
  * @author Noah Ogilvie
+ * @version 3.0
  */
-public class ShortQNADoor extends AbstractDoor {
+public final class ShortQNADoor extends AbstractDoor {
 
     /**
      * ShortQNADoor() is a public constructor that passes its parameters into the parent's constructor.
@@ -30,5 +31,35 @@ public class ShortQNADoor extends AbstractDoor {
      */
     public boolean isCorrect(final String theChoice) {
         return theChoice.equalsIgnoreCase(getAnswer());
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean equals(final Object theOther) {
+        if (this == theOther) {
+            return true;
+        }
+
+        if (theOther == null) {
+            return false;
+        }
+
+        if (!(theOther instanceof ShortQNADoor)) {
+            return false;
+        }
+
+        return super.equals(theOther);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public int hashCode() {
+        int hash = 97;
+        hash = 31 * hash + super.hashCode();
+        return hash;
     }
 }

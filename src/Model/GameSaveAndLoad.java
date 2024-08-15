@@ -1,3 +1,7 @@
+/*
+ * T CSS 360 - Summer 2024
+ * Nintendo Trivia Maze
+ */
 package Model;
 
 import java.io.*;
@@ -6,6 +10,8 @@ import java.io.*;
  * GameSaveAndLoad class
  *
  * @author Noah Ogilvie
+ * @author Andrew Hwang
+ * @version 2.0
  */
 public final class GameSaveAndLoad {
 

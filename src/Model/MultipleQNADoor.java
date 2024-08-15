@@ -13,6 +13,7 @@ import java.util.List;
  * a separate door that holds features of multiple choice options.
  *
  * @author Noah Ogilvie
+ * @version 2.0
  */
 public final class MultipleQNADoor extends AbstractDoor {
 
@@ -41,5 +42,38 @@ public final class MultipleQNADoor extends AbstractDoor {
      */
     public List<String> getOtherOptions() {
         return new ArrayList<>(this.myOtherOptions);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean equals(final Object theOther) {
+        if (this == theOther) {
+            return true;
+        }
+
+        if (theOther == null) {
+            return false;
+        }
+
+        if (!(theOther instanceof MultipleQNADoor otherMultipleQNA)) {
+            return false;
+        }
+
+        return super.equals(theOther) &&
+                this.myOtherOptions.equals(otherMultipleQNA.myOtherOptions);
+
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public int hashCode() {
+        int hash = 97;
+        hash = 31 * hash + super.hashCode();
+        hash = 31 * hash + this.myOtherOptions.hashCode();
+        return hash;
     }
 }

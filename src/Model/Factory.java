@@ -5,19 +5,21 @@
 
 package Model;
 
+import org.sqlite.SQLiteDataSource;
+
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
-import org.sqlite.SQLiteDataSource;
 
 /**
  * Factory class is a class that acts like a factory for the creation of
  * different types of doors. All doors are held inside a list.
  *
  * @author Noah Ogilvie
+ * @version 3.0
  */
 public final class Factory {
 
@@ -35,10 +37,10 @@ public final class Factory {
      * Factory() is a public constructor initializing the private fields.
      */
     public Factory() {
-        AnswersAndQuestionsDB myDatabase = new AnswersAndQuestionsDB();
-        this.myDataSource = myDatabase.getDataSource();
-        myDatabase.getOriginalTables(this.myDataSource);
-        myDatabase.getOriginalValues(this.myDataSource);
+        AnswersAndQuestionsDB database = new AnswersAndQuestionsDB();
+        this.myDataSource = database.getDataSource();
+        database.getOriginalTables(this.myDataSource);
+        database.getOriginalValues(this.myDataSource);
         this.myListOfDoors = new ArrayList<>();
     }
 
@@ -49,7 +51,7 @@ public final class Factory {
      */
     private void createShortQNADoors() {
         final String query = "select *" +
-                "from shortQuestions;";
+                             "from shortQuestions;";
 
         try (Connection conn = this.myDataSource.getConnection();
              Statement stmt = conn.createStatement()) {
@@ -76,7 +78,7 @@ public final class Factory {
     private void createTrueOrFalseDoors() {
 
         final String query = "select *" +
-                "from TorF;";
+                             "from TorF;";
 
         try (Connection conn = this.myDataSource.getConnection();
              Statement stmt = conn.createStatement()) {
@@ -105,8 +107,8 @@ public final class Factory {
      */
     private void createMultipleQNADoors() {
         final String query = "select am.answer, am.not1, am.not2, am.not3, qm.prompt " +
-                "from answersMultiple as am " +
-                "join questionsMultiple as qm on am.answer = qm.answer;";
+                             "from answersMultiple as am " +
+                             "join questionsMultiple as qm on am.answer = qm.answer;";
 
         try (Connection conn = this.myDataSource.getConnection();
              Statement stmt = conn.createStatement()) {

@@ -3,19 +3,20 @@
  */
 package Model;
 
+import org.sqlite.SQLiteDataSource;
+
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.sqlite.SQLiteDataSource;
-
 /**
  * AnswersAndQuestionsDB class contains the connect and the database for the
  * trivia maze game application.
  *
  * @author Noah Ogilvie
+ * @version 4.0
  */
 public final class AnswersAndQuestionsDB {
 

@@ -1,4 +1,4 @@
-package Model;
+package Test;
 
 public class MazeTest {
 

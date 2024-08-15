@@ -48,10 +48,10 @@ public abstract class AbstractDoor implements Serializable {
      */
     protected AbstractDoor(final String theAnswer,
                            final String theQuestion) {
-        myUserAttempt = false;
-        myLockedDoor = false;
-        myAnswer = theAnswer;
-        myQuestion = theQuestion;
+        this.myUserAttempt = false;
+        this.myLockedDoor = false;
+        this.myAnswer = theAnswer;
+        this.myQuestion = theQuestion;
     }
 
     /**
@@ -60,7 +60,7 @@ public abstract class AbstractDoor implements Serializable {
      * @return the current state of the door.
      */
     public final boolean getStateOfDoor() {
-        return myLockedDoor;
+        return this.myLockedDoor;
     }
 
     /**
@@ -68,9 +68,9 @@ public abstract class AbstractDoor implements Serializable {
      * @param theState      the changed door state
      */
     public final void setStateOfDoor(final boolean theState) {
-        myLockedDoor = theState;
-        if (myLockedDoor) {
-            myUserAttempt = true;
+        this.myLockedDoor = theState;
+        if (this.myLockedDoor) {
+            this.myUserAttempt = true;
         }
     }
 
@@ -80,7 +80,7 @@ public abstract class AbstractDoor implements Serializable {
      * @return the users attempt.
      */
     public final boolean getUserAttempted() {
-        return myUserAttempt;
+        return this.myUserAttempt;
     }
 
     /**
@@ -88,7 +88,7 @@ public abstract class AbstractDoor implements Serializable {
      * @param theUserAttempted     boolean value if the user attempted
      */
     public final void setUserAttempted(final boolean theUserAttempted) {
-        myUserAttempt = theUserAttempted;
+        this.myUserAttempt = theUserAttempted;
     }
 
     /**
@@ -97,7 +97,7 @@ public abstract class AbstractDoor implements Serializable {
      * @return the answer.
      */
     public final String getAnswer() {
-        return myAnswer;
+        return this.myAnswer;
     }
 
     /**
@@ -106,6 +106,38 @@ public abstract class AbstractDoor implements Serializable {
      * @return the question.
      */
     public final String getQuestion() {
-        return myQuestion;
+        return this.myQuestion;
+    }
+
+    @Override
+    public boolean equals(final Object theOther) {
+        if (this == theOther) {
+            return true;
+        }
+
+        if (theOther == null) {
+            return false;
+        }
+
+        if (!(theOther instanceof AbstractDoor)) {
+            return false;
+        }
+
+        final AbstractDoor otherAbstractDoor = (AbstractDoor) theOther;
+
+        return this.myUserAttempt == otherAbstractDoor.myUserAttempt &&
+                this.myLockedDoor == otherAbstractDoor.myLockedDoor &&
+                this.myAnswer.equals(otherAbstractDoor.myAnswer) &&
+                this.myQuestion.equals(otherAbstractDoor.myQuestion);
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 97;
+        hash = 31 * hash + (this.myUserAttempt ? 1 : 0);
+        hash = 31 * hash + (this.myLockedDoor ? 1 : 0);
+        hash = 31 * hash + this.myAnswer.hashCode();
+        hash = 31 * hash + this.myQuestion.hashCode();
+        return hash;
     }
 }

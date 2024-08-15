@@ -11,7 +11,7 @@ package Model;
  *
  * @author Noah Ogilvie
  */
-public class ShortQNADoor extends AbstractDoor {
+public final class ShortQNADoor extends AbstractDoor {
 
     /**
      * ShortQNADoor() is a public constructor that passes its parameters into the parent's constructor.
@@ -30,5 +30,29 @@ public class ShortQNADoor extends AbstractDoor {
      */
     public boolean isCorrect(final String theChoice) {
         return theChoice.equalsIgnoreCase(getAnswer());
+    }
+
+    @Override
+    public boolean equals(final Object theOther) {
+        if (this == theOther) {
+            return true;
+        }
+
+        if (theOther == null) {
+            return false;
+        }
+
+        if (!(theOther instanceof ShortQNADoor)) {
+            return false;
+        }
+
+        return super.equals(theOther);
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 97;
+        hash = 31 * hash + super.hashCode();
+        return hash;
     }
 }

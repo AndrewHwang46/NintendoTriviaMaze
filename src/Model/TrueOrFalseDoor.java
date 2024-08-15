@@ -41,4 +41,30 @@ public final class TrueOrFalseDoor extends AbstractDoor {
         return this.myWrongAnswer;
     }
 
+    @Override
+    public boolean equals(final Object theOther) {
+        if (this == theOther) {
+            return true;
+        }
+
+        if (theOther == null) {
+            return false;
+        }
+
+        if (!(theOther instanceof TrueOrFalseDoor otherTrueOrFalseDoor)) {
+            return false;
+        }
+
+
+
+        return super.equals(theOther) &&
+                this.myWrongAnswer.equals(otherTrueOrFalseDoor.myWrongAnswer);
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 97;
+        hash = 31 * hash + this.myWrongAnswer.hashCode();
+        return hash;
+    }
 }

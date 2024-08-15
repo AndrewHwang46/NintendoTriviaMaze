@@ -164,55 +164,6 @@ public class GameFrame extends JFrame implements ActionListener {
     }
 
 
-//    public GameFrame() {
-//        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//        setResizable(false);
-//        setTitle("Trivia Maze");
-//
-//        contentPanel = new JPanel(new CardLayout());
-//
-//        myGamePanel = new GamePanel(this);
-//        add(myGamePanel);
-//
-//        initComponents();
-//        pack();
-//        setLocationRelativeTo(null);
-//        setVisible(true);
-//
-//        myGamePanel.startGame();
-//    }
-//
-//    private void initComponents() {
-//
-//        myMainMenuGUI = new MainMenuGUI(this);
-//        myGamePanel = new GamePanel(this);
-//
-//        Player player = Player.getInstance();
-//        myStatusGUI = new StatusGUI(player);
-//
-//        contentPanel.add(myMainMenuGUI, "MainMenu");
-//        contentPanel.add(myGamePanel, "Game");
-//
-//        add(myStatusGUI, BorderLayout.NORTH);
-//
-//        cardLayout.show(contentPanel, "MainMenu");
-//        myGameSaveLoad = new GameSaveAndLoad();
-//
-//        myMainMenuGUI = new MainMenuGUI(this);
-//        myGamePanel = new GamePanel(this);
-//
-//        Player player = Player.getInstance();
-//        myStatusGUI = new StatusGUI(player);
-//
-//        contentPanel.add(myMainMenuGUI, "MainMenu");
-//        contentPanel.add(myGamePanel, "Game");
-//
-//        ((CardLayout) contentPanel.getLayout()).show(contentPanel, "MainMenu");
-//
-//        myResumeButton = new JButton("Resume");
-//        myResumeButton.addActionListener(this);
-//    }
-
     private void initMenuBar() {
         myMenuBar = new JMenuBar();
 

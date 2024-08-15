@@ -7,7 +7,8 @@ package Model;
 import java.io.*;
 
 /**
- * GameSaveAndLoad class
+ * GameSaveAndLoad class uses serialization and
+ * deserialization in order to save and load the game.
  *
  * @author Noah Ogilvie
  * @author Andrew Hwang

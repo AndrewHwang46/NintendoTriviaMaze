@@ -7,8 +7,8 @@ import java.awt.*;
 import java.awt.event.ActionListener;
 
 public class MainMenuGUI extends JPanel {
-    private JButton startButton, loadButton, myInstructions, exitButton;
-    private JLabel titleLabel;
+    private JButton myStartButton, myLoadButton, myInstructions, myExitButton;
+    private JLabel myTitleLabel;
     private GameSaveAndLoad myGameSaveAndLoad;
 
 
@@ -16,12 +16,12 @@ public class MainMenuGUI extends JPanel {
         myGameSaveAndLoad = new GameSaveAndLoad();
         setLayout(new GridLayout(5, 1, 10, 10));
 
-        titleLabel = new JLabel("Trivia Maze", SwingConstants.CENTER);
-        titleLabel.setFont(new Font("Arial", Font.BOLD, 18));
+        myTitleLabel = new JLabel("Trivia Maze", SwingConstants.CENTER);
+        myTitleLabel.setFont(new Font("Arial", Font.BOLD, 18));
 
-        startButton = createButton("Start", e -> gameFrame.startGame());
-        loadButton = createButton("Load Save", e -> {
-            if(myGameSaveAndLoad.getSaved()) {
+        myStartButton = createButton("Start", e -> gameFrame.startGame());
+        myLoadButton = createButton("Load Save", e -> {
+            if(myGameSaveAndLoad.getSaved() == Boolean.TRUE) {
                 myGameSaveAndLoad.loadGame();
             }
         });
@@ -33,7 +33,7 @@ public class MainMenuGUI extends JPanel {
                     "true/false, and short response. If you get the answer wrong then the door locks.\n" +
                     "You must reach the end before you lock all the doors.");
         });
-        exitButton = createButton("Exit", e -> {
+        myExitButton = createButton("Exit", e -> {
             int confirm = JOptionPane.showConfirmDialog(this,
                     "Are you sure you want to exit?", "Confirm Exit",
                     JOptionPane.YES_NO_OPTION);
@@ -42,11 +42,11 @@ public class MainMenuGUI extends JPanel {
             }
         });
 
-        add(titleLabel);
-        add(startButton);
-        add(loadButton);
+        add(myTitleLabel);
+        add(myStartButton);
+        add(myLoadButton);
         add(myInstructions);
-        add(exitButton);
+        add(myExitButton);
 
     }
 

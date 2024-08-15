@@ -112,17 +112,17 @@ public final class AnswersAndQuestionsDB {
      */
     private void createOriginalTables(final SQLiteDataSource theDS) {
         final String query = "create table if not exists answersMultiple (" +
-                "answer text unique not null, " +
-                "not1 text unique not null," +
-                "not2 text unique not null," +
-                "not3 text unique not null," +
-                "primary key(answer));";
+                             "answer text unique not null, " +
+                             "not1 text unique not null," +
+                             "not2 text unique not null," +
+                             "not3 text unique not null," +
+                             "primary key(answer));";
 
         final String query1 = "create table if not exists TorF (" +
-                "questions text unique not null, " +
-                "answerTorF text not null, " +
-                "notanswer text not null," +
-                "primary key(questions));";
+                              "questions text unique not null, " +
+                              "answerTorF text not null, " +
+                              "notanswer text not null," +
+                              "primary key(questions));";
 
         final String query3 = "create table if not exists questionsMultiple (" +
                 "answer text unique not null, " +

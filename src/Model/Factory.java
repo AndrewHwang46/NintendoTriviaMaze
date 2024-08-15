@@ -1,3 +1,8 @@
+/*
+ * T CSS 360 - Summer 2024
+ * Nintendo Trivia Maze
+ */
+
 package Model;
 
 import java.sql.Connection;
@@ -9,14 +14,26 @@ import java.util.List;
 import org.sqlite.SQLiteDataSource;
 
 /**
+ * Factory class is a class that acts like a factory for the creation of
+ * different types of doors. All doors are held inside a list.
  *
  * @author Noah Ogilvie
  */
 public final class Factory {
 
+    /**
+     * myDataSource is a SQLiteDataSource private field.
+     */
     private final SQLiteDataSource myDataSource;
+
+    /**
+     * myListOfDoors is a list data structure private field that holds all types of doors.
+     */
     private final List<AbstractDoor> myListOfDoors;
 
+    /**
+     * Factory() is a public constructor initializing the private fields.
+     */
     public Factory() {
         AnswersAndQuestionsDB myDatabase = new AnswersAndQuestionsDB();
         this.myDataSource = myDatabase.getDataSource();
@@ -25,12 +42,17 @@ public final class Factory {
         this.myListOfDoors = new ArrayList<>();
     }
 
-    private final void createShortQNADoors() {
+    /**
+     * createShortQNADoors() method grabs the short question and answer from the
+     * SQLite database into a door. Each construction of a door is appended into
+     * the data structure private field.
+     */
+    private void createShortQNADoors() {
         final String query = "select *" +
-                             "from shortQuestions;";
+                "from shortQuestions;";
 
         try (Connection conn = this.myDataSource.getConnection();
-             Statement stmt = conn.createStatement(); ) {
+             Statement stmt = conn.createStatement()) {
             ResultSet rs = stmt.executeQuery(query);
 
             while (rs.next()) {
@@ -42,17 +64,22 @@ public final class Factory {
                 this.myListOfDoors.add(temp);
             }
         } catch (final SQLException e) {
-            e.printStackTrace();
+            System.out.println("Unable to create short QNA doors: " + e.getMessage());
         }
     }
 
-    private final void createTrueOrFalseDoors() {
+    /**
+     * createTrueOrFalseDoors() method grabs the true or false questions from the
+     * SQLite database into a door. Each construction of a door is appended into
+     * the data structure private field.
+     */
+    private void createTrueOrFalseDoors() {
 
         final String query = "select *" +
-                             "from TorF;";
+                "from TorF;";
 
         try (Connection conn = this.myDataSource.getConnection();
-             Statement stmt = conn.createStatement(); ) {
+             Statement stmt = conn.createStatement()) {
 
             ResultSet rs = stmt.executeQuery(query);
 
@@ -67,17 +94,22 @@ public final class Factory {
                 this.myListOfDoors.add(temp);
             }
         } catch (final SQLException e) {
-            e.printStackTrace();
+            System.out.println("Unable to create true or false doors: " + e.getMessage());
         }
     }
 
-    private final void createMultipleQNADoors() {
+    /**
+     * createMultipleQNADoors() method grabs the multiple choice questions from the
+     * SQLite database into a door. Each construction of a door is appended into
+     * the data structure private field.
+     */
+    private void createMultipleQNADoors() {
         final String query = "select am.answer, am.not1, am.not2, am.not3, qm.prompt " +
-                             "from answersMultiple as am " +
-                             "join questionsMultiple as qm on am.answer = qm.answer;";
+                "from answersMultiple as am " +
+                "join questionsMultiple as qm on am.answer = qm.answer;";
 
         try (Connection conn = this.myDataSource.getConnection();
-             Statement stmt = conn.createStatement(); ) {
+             Statement stmt = conn.createStatement()) {
 
             ResultSet rs = stmt.executeQuery(query);
 
@@ -100,24 +132,19 @@ public final class Factory {
                 this.myListOfDoors.add(temp);
             }
         } catch (final SQLException e) {
-            e.printStackTrace();
+            System.out.println("Unable to create multiple QNA doors: " + e.getMessage());
         }
     }
 
-    public final List<AbstractDoor> getListOfDoors() {
+    /**
+     * getListOfDoors() method is a getter method for the data structure private field.
+     *
+     * @return the total list of all doors.
+     */
+    public List<AbstractDoor> getListOfDoors() {
         createMultipleQNADoors();
         createTrueOrFalseDoors();
         createShortQNADoors();
-//        int i = 1;
-//        for (AbstractDoor door : this.myListOfDoors) {
-//            System.out.println("Question: " + door.getQuestion() + " Answer: " + door.getAnswer() + " Number: " + i);
-//            i++;
-//        }
-//        int j = 1;
-//        for (AbstractDoor door : this.myListOfDoors) {
-//            System.out.println("Answer: " + door.getAnswer() + j);
-//            j++;
-//        }
         return new ArrayList<>(this.myListOfDoors);
     }
 }

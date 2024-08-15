@@ -136,47 +136,18 @@ public class GameFrame extends JFrame implements ActionListener {
         setResizable(false);
         setTitle("Trivia Maze");
 
-        myGamePanel = new GamePanel(this);
-        add(myGamePanel);
+        cardLayout = new CardLayout();
+        contentPanel = new JPanel(cardLayout);
+        add(contentPanel, BorderLayout.CENTER);
+
         initComponents();
+
         pack();
         setLocationRelativeTo(null);
         setVisible(true);
+    }
 
-        myGamePanel.startGame();
-//        setTitle("Trivia Maze");
-//        setSize(FRAME_WIDTH, FRAME_HEIGHT);
-//        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-//        setResizable(false);
-//        setLocationRelativeTo(null);
-//
-        cardLayout = new CardLayout();
-        contentPanel = new JPanel(cardLayout);
-//
-//        initComponents();
-//        initMenuBar();
-//
-//        setLayout(new BorderLayout());
-//        add(contentPanel, BorderLayout.CENTER);
-//        add(myStatusGUI, BorderLayout.NORTH);
-//
-//        pack();
-//        setVisible(true);
-    }
-    private void initGame() {
-        System.out.println("Initializing game components");
-        myKeyboard = new Keyboard();
-        addKeyListener(myKeyboard);
-        myPlayer = Player.getInstance();
-        myMaze = Maze.getMazeSingleton("/View/Sprites/ScaleDownMaze.txt");
-        System.out.println("Creating Game object");
-        myGame = new Game(myGamePanel, myKeyboard);
-        System.out.println("Game object created");
-        // ... other initialization ...
-    }
     private void initComponents() {
-        myGameSaveLoad = new GameSaveAndLoad();
-
         myMainMenuGUI = new MainMenuGUI(this);
         myGamePanel = new GamePanel(this);
 
@@ -186,11 +157,60 @@ public class GameFrame extends JFrame implements ActionListener {
         contentPanel.add(myMainMenuGUI, "MainMenu");
         contentPanel.add(myGamePanel, "Game");
 
-        cardLayout.show(contentPanel, "MainMenu");
+        add(myStatusGUI, BorderLayout.NORTH);
 
-        myResumeButton = new JButton("Resume");
-        myResumeButton.addActionListener(this);
+        cardLayout.show(contentPanel, "MainMenu");
     }
+
+
+//    public GameFrame() {
+//        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+//        setResizable(false);
+//        setTitle("Trivia Maze");
+//
+//        contentPanel = new JPanel(new CardLayout());
+//
+//        myGamePanel = new GamePanel(this);
+//        add(myGamePanel);
+//
+//        initComponents();
+//        pack();
+//        setLocationRelativeTo(null);
+//        setVisible(true);
+//
+//        myGamePanel.startGame();
+//    }
+//
+//    private void initComponents() {
+//
+//        myMainMenuGUI = new MainMenuGUI(this);
+//        myGamePanel = new GamePanel(this);
+//
+//        Player player = Player.getInstance();
+//        myStatusGUI = new StatusGUI(player);
+//
+//        contentPanel.add(myMainMenuGUI, "MainMenu");
+//        contentPanel.add(myGamePanel, "Game");
+//
+//        add(myStatusGUI, BorderLayout.NORTH);
+//
+//        cardLayout.show(contentPanel, "MainMenu");
+//        myGameSaveLoad = new GameSaveAndLoad();
+//
+//        myMainMenuGUI = new MainMenuGUI(this);
+//        myGamePanel = new GamePanel(this);
+//
+//        Player player = Player.getInstance();
+//        myStatusGUI = new StatusGUI(player);
+//
+//        contentPanel.add(myMainMenuGUI, "MainMenu");
+//        contentPanel.add(myGamePanel, "Game");
+//
+//        ((CardLayout) contentPanel.getLayout()).show(contentPanel, "MainMenu");
+//
+//        myResumeButton = new JButton("Resume");
+//        myResumeButton.addActionListener(this);
+//    }
 
     private void initMenuBar() {
         myMenuBar = new JMenuBar();

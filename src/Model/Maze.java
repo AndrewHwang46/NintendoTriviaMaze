@@ -269,6 +269,22 @@ public class Maze implements Serializable {
         myMazeSingleton = theMazeSingleton;
     }
 
+    public int getMyEntranceRow() {
+            return myEntranceRow;
+    }
+
+    public int getMyEntranceColumn() {
+        return myEntranceColumn;
+    }
+
+    public int getMyExitRow() {
+        return myExitRow;
+    }
+
+    public int getMyExitColumn() {
+        return myExitColumn;
+    }
+
 
 }
 

@@ -9,7 +9,7 @@ public class MainMenuGUI extends JFrame implements ActionListener {
     private JButton startButton, optionsButton, helpButton, exitButton;
     private JLabel titleLabel;
 
-    public MainMenuGUI() {
+    public MainMenuGUI(GameFrame gameFrame) {
         setTitle("Main Menu");
         setSize(300, 400);
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -58,10 +58,10 @@ public class MainMenuGUI extends JFrame implements ActionListener {
     }
 
 
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(() -> {
-            MainMenuGUI menu = new MainMenuGUI();
-            menu.setVisible(true);
-        });
-    }
+//    public void main(String[] args) {
+//        SwingUtilities.invokeLater(() -> {
+//            MainMenuGUI menu = new MainMenuGUI(this);
+//            menu.setVisible(true);
+//        });
+//    }
 }

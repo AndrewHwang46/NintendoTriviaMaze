@@ -30,20 +30,17 @@ public final class GameSaveAndLoad {
 
     public boolean saveGame() {
         mySaved = true;
-        boolean gameSaved = false;
         try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(FILE_NAME))) {
             out.writeObject(myMaze);
             out.writeObject(myPlayer);
-            gameSaved = true;
+            return true;
         } catch (IOException e) {
             System.err.println("Error saving game: " + e.getMessage());
-            gameSaved = false;
+            return false;
         }
-        return gameSaved;
     }
 
     public boolean loadGame() {
-        boolean gameLoaded = false;
         try (ObjectInputStream in = new ObjectInputStream(new FileInputStream(FILE_NAME))) {
             Maze loadedMaze = (Maze) in.readObject();
             Player loadedPlayer = (Player) in.readObject();
@@ -56,12 +53,11 @@ public final class GameSaveAndLoad {
             this.myMaze = loadedMaze;
             this.myPlayer = Player.getInstance();
 
-            gameLoaded = true;
+            return true;
         } catch (IOException | ClassNotFoundException e) {
             System.err.println("Error loading game: " + e.getMessage());
-            gameLoaded = false;
+            return false;
         }
-        return gameLoaded;
     }
 
     public Maze getMaze() {

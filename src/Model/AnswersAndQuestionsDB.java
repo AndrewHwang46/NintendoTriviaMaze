@@ -4,7 +4,6 @@
 package Model;
 
 import org.sqlite.SQLiteDataSource;
-
 import java.sql.Connection;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -24,64 +23,6 @@ public final class AnswersAndQuestionsDB {
      * myUrl is a private field holding the url for the database.
      */
     private final String myUrl;
-
-    //was used to test methods and whether if the database works or not (it works).
-//    public static void main(String[] args) {
-//        SQLiteDataSource ds = initializeDatabase();
-//        final List<String> myList = new ArrayList<>();
-//        myList.add("drop table answersMultiple");
-//        myList.add("drop table questionsMultiple");
-//        myList.add("drop table TorF");
-//        insertManyQueries(ds, myList);
-//        createOriginalTables(ds);
-//        insertManyQueries(ds, originalValues());
-//
-//        final String query = "select am.answer, am.not1, am.not2, am.not3, qm.prompt " +
-//                             "from answersMultiple as am " +
-//                             "join questionsMultiple as qm on am.answer = qm.answer;";
-//
-//        try (Connection conn = ds.getConnection();
-//             Statement stmt = conn.createStatement(); ) {
-//
-//            ResultSet rs = stmt.executeQuery(query);
-//
-//            int i = 1;
-//            while (rs.next()) {
-////                String question = rs.getString("questions");
-////                String answer = rs.getString("answerTorF");
-////                String notanswer = rs.getString("notanswer");
-////                System.out.println(question + " " +  answer + " " + notanswer);
-//                String prompt = rs.getString("prompt");
-//                String answer = rs.getString("answer");
-//                String not1 = rs.getString("not1");
-//                String not2 = rs.getString("not2");
-//                String not3 = rs.getString("not3");
-//                System.out.println("Question: " + prompt + ", Answer: " + answer + " not1: " + not1
-//                                 + " not2: " + not2 + " not3 " + not3 + " Number: " + i);
-//                i++;
-//            }
-//        } catch (SQLException e) {
-//            e.printStackTrace();
-//        }
-//
-//        final String query2 = "select distinct * from TorF";
-//
-//        try (Connection conn = ds.getConnection();
-//             Statement stmt = conn.createStatement();) {
-//            ResultSet rs = stmt.executeQuery(query2);
-//
-//            int i = 1;
-//            while (rs.next()) {
-//                String question = rs.getString("questions");
-//                String answer = rs.getString("answerTorF");
-//                System.out.println("Question: " + question + ", Answer: " + answer + " Number: " + i);
-//                i++;
-//            }
-//
-//        } catch (final SQLException e) {
-//            e.printStackTrace();
-//        }
-//    }
 
     /**
      * AnswersAndQuestionsDB() constructor passes the database url value for the private field.
@@ -126,17 +67,17 @@ public final class AnswersAndQuestionsDB {
                               "primary key(questions));";
 
         final String query3 = "create table if not exists questionsMultiple (" +
-                "answer text unique not null, " +
-                "prompt text unique not null, " +
-                "foreign key(answer) references answersMultiple(answer)" +
-                "on delete cascade " +
-                "on update cascade, " +
-                "primary key(prompt));";
+                              "answer text unique not null, " +
+                              "prompt text unique not null, " +
+                              "foreign key(answer) references answersMultiple(answer)" +
+                              "on delete cascade " +
+                              "on update cascade, " +
+                              "primary key(prompt));";
 
         final String query4 = "create table if not exists shortQuestions (" +
-                "shortAnswer text unique not null, " +
-                "shortPrompt text unique not null, " +
-                "primary key(shortAnswer));";
+                              "shortAnswer text unique not null, " +
+                              "shortPrompt text unique not null, " +
+                              "primary key(shortAnswer));";
 
         try (Connection conn = theDS.getConnection();
              Statement stmt = conn.createStatement()) {

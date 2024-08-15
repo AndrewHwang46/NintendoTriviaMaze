@@ -1,10 +1,13 @@
+/*
+ * T CSS 360 - Summer 2024
+ * Nintendo Trivia Maze
+ */
 package Test;
 
 import Model.*;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.sqlite.SQLiteDataSource;
-
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -14,31 +17,48 @@ import java.util.List;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class FactoryTest {
+/**
+ * FactoryTest class is testing for the construction of each door correctly.
+ *
+ * @author Noah Ogilvie
+ * @version 1.0
+ */
+final class FactoryTest {
 
-    private Factory myFactory;
-
+    /**
+     * myDoorsList is a list data structure private field that holds
+     * the complete total of doors found in the game.
+     */
     private List<AbstractDoor> myDoorsList;
 
+    /**
+     * myDataSource is a SQLiteDataSource private field that holds
+     * the connection into SQLite.
+     */
     private SQLiteDataSource myDataSource;
 
-    private AnswersAndQuestionsDB myDatabase;
-
+    /**
+     * setUp() method initializes the global private fields.
+     */
     @BeforeEach
-    public void setUp() {
-        this.myFactory = new Factory();
+    void setUp() {
+        Factory myFactory = new Factory();
         this.myDataSource = new SQLiteDataSource();
-        this.myDatabase = new AnswersAndQuestionsDB();
-        this.myDoorsList = new ArrayList<>(this.myFactory.getListOfDoors());
+        AnswersAndQuestionsDB myDatabase = new AnswersAndQuestionsDB();
+        this.myDoorsList = new ArrayList<>(myFactory.getListOfDoors());
 
-        this.myDataSource = this.myDatabase.getDataSource();
-        this.myDataSource = this.myDatabase.getDataSource();
-        this.myDatabase.getOriginalTables(this.myDataSource);
-        this.myDatabase.getOriginalValues(this.myDataSource);
+        this.myDataSource = myDatabase.getDataSource();
+        this.myDataSource = myDatabase.getDataSource();
+        myDatabase.getOriginalTables(this.myDataSource);
+        myDatabase.getOriginalValues(this.myDataSource);
     }
 
+    /**
+     * multipleQNATest() method checks whether if all the MultipleQNADoor
+     * is created and sent into the list data structure.
+     */
     @Test
-    public void multipleQNATest() {
+    void multipleQNATest() {
         List<AbstractDoor> multipleQNA = new ArrayList<>();
         for (AbstractDoor door : this.myDoorsList) {
             if (door instanceof MultipleQNADoor) {
@@ -57,18 +77,18 @@ public class FactoryTest {
             ResultSet rs = stmt.executeQuery(query);
 
             while (rs.next()) {
-                List<String> notanswer = new ArrayList<>();
+                List<String> notAnswer = new ArrayList<>();
                 String prompt = rs.getString("prompt");
                 String answer = rs.getString("answer");
                 String not1 = rs.getString("not1");
                 String not2 = rs.getString("not2");
                 String not3 = rs.getString("not3");
 
-                notanswer.add(not1);
-                notanswer.add(not2);
-                notanswer.add(not3);
+                notAnswer.add(not1);
+                notAnswer.add(not2);
+                notAnswer.add(not3);
 
-                MultipleQNADoor temp = new MultipleQNADoor(answer, prompt, notanswer);
+                MultipleQNADoor temp = new MultipleQNADoor(answer, prompt, notAnswer);
                 expected.add(temp);
             }
         } catch (final SQLException e) {
@@ -77,8 +97,12 @@ public class FactoryTest {
         assertEquals(expected, multipleQNA);
     }
 
+    /**
+     * shortQNATest() method checks whether if all the ShortQNADoor
+     * is created and sent into the list data structure.
+     */
     @Test
-    public void shortQNATest() {
+    void shortQNATest() {
         List<AbstractDoor> shortQNA = new ArrayList<>();
         for (AbstractDoor door : this.myDoorsList) {
             if (door instanceof ShortQNADoor) {
@@ -108,8 +132,12 @@ public class FactoryTest {
         assertEquals(expected, shortQNA);
     }
 
+    /**
+     * trueOrFalseTest() method checks whether if all the TrueOrFalseDoor
+     * is created and sent into the list data structure.
+     */
     @Test
-    public void trueOrFalseTest() {
+    void trueOrFalseTest() {
         List<AbstractDoor> trueOrFalse = new ArrayList<>();
         for (AbstractDoor door : this.myDoorsList) {
             if (door instanceof TrueOrFalseDoor) {
@@ -141,8 +169,13 @@ public class FactoryTest {
         assertEquals(expected, trueOrFalse);
     }
 
+    /**
+     * allDoorsTest() method checks whether if all the door classes
+     * are created and sent into the list data structure.
+     */
     @Test
-    public void allDoorsTest() {
+    void allDoorsTest() {
+
         List<AbstractDoor> expected = new ArrayList<>();
 
         final String query1 = "SELECT am.answer, am.not1, am.not2, am.not3, qm.prompt " +
@@ -154,18 +187,18 @@ public class FactoryTest {
             ResultSet rs = stmt.executeQuery(query1);
 
             while (rs.next()) {
-                List<String> notanswer = new ArrayList<>();
+                List<String> notAnswer = new ArrayList<>();
                 String prompt = rs.getString("prompt");
                 String answer = rs.getString("answer");
                 String not1 = rs.getString("not1");
                 String not2 = rs.getString("not2");
                 String not3 = rs.getString("not3");
 
-                notanswer.add(not1);
-                notanswer.add(not2);
-                notanswer.add(not3);
+                notAnswer.add(not1);
+                notAnswer.add(not2);
+                notAnswer.add(not3);
 
-                MultipleQNADoor temp = new MultipleQNADoor(answer, prompt, notanswer);
+                MultipleQNADoor temp = new MultipleQNADoor(answer, prompt, notAnswer);
                 expected.add(temp);
             }
         } catch (final SQLException e) {

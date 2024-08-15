@@ -12,6 +12,7 @@ import java.io.Serializable;
  * methods for the different types of doors found in the maze.
  *
  * @author Noah Ogilvie
+ * @version 3.0
  */
 public abstract class AbstractDoor implements Serializable {
 

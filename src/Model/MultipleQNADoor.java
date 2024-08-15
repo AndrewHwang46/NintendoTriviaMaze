@@ -13,6 +13,7 @@ import java.util.List;
  * a separate door that holds features of multiple choice options.
  *
  * @author Noah Ogilvie
+ * @version 2.0
  */
 public final class MultipleQNADoor extends AbstractDoor {
 

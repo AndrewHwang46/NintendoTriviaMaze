@@ -10,6 +10,7 @@ package Model;
  * a separate door that holds features of short questions with answer inputs options.
  *
  * @author Noah Ogilvie
+ * @version 3.0
  */
 public final class ShortQNADoor extends AbstractDoor {
 
@@ -32,6 +33,9 @@ public final class ShortQNADoor extends AbstractDoor {
         return theChoice.equalsIgnoreCase(getAnswer());
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean equals(final Object theOther) {
         if (this == theOther) {
@@ -49,6 +53,9 @@ public final class ShortQNADoor extends AbstractDoor {
         return super.equals(theOther);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public int hashCode() {
         int hash = 97;

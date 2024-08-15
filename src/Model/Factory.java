@@ -19,6 +19,7 @@ import java.util.List;
  * different types of doors. All doors are held inside a list.
  *
  * @author Noah Ogilvie
+ * @version 3.0
  */
 public final class Factory {
 

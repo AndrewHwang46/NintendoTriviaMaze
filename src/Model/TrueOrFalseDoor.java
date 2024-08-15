@@ -10,6 +10,7 @@ package Model;
  * a separate door that holds features of true or false questions.
  *
  * @author Noah Ogilvie
+ * @version 2.0
  */
 public final class TrueOrFalseDoor extends AbstractDoor {
 
@@ -41,6 +42,9 @@ public final class TrueOrFalseDoor extends AbstractDoor {
         return this.myWrongAnswer;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean equals(final Object theOther) {
         if (this == theOther) {
@@ -55,12 +59,13 @@ public final class TrueOrFalseDoor extends AbstractDoor {
             return false;
         }
 
-
-
         return super.equals(theOther) &&
                 this.myWrongAnswer.equals(otherTrueOrFalseDoor.myWrongAnswer);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public int hashCode() {
         int hash = 97;

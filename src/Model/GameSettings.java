@@ -1,25 +1,24 @@
 package Model;
 
 public class GameSettings {
-    /** Original Tile size */
-    public static final int ORIGINAL_TILE_SIZE = 32;
-    /** Scale factor */
-    public static final int SCALE = 2;
-    /** Tile size with scale factor */
-    public static final int TILE_SIZE = ORIGINAL_TILE_SIZE * SCALE;
-    /** Max screen columns */
-    public static final int MAX_SCREEN_COLUMN = 16;
-    /** Max screen rows */
-    public static final int MAX_SCREEN_ROW = 12;
-    /** Screen width */
-    public static final int SCREEN_WIDTH = 54 * MAX_SCREEN_COLUMN;
-    /** Screen height */
-    public static final int SCREEN_HEIGHT = 54 * MAX_SCREEN_ROW;
-    /** Max world columns */
-    public static final int MAX_WORLD_COLUMN = 76;
-    /** Max world rows */
-    public static final int MAX_WORLD_ROW = 72;
-    /** FPS */
+    public static final int SCREEN_WIDTH = 800;
+    public static final int SCREEN_HEIGHT = 600;
+    public static final int TILE_SIZE = 32;
     public static final int FPS = 60;
+    public static final int MAX_WORLD_COLUMN = 76;
+    public static final int MAX_WORLD_ROW = 72;
+
+    // Maze settings
+    public static final int MAZE_WIDTH = 25; // SCREEN_WIDTH / TILE_SIZE
+    public static final int MAZE_HEIGHT = 18; // SCREEN_HEIGHT / TILE_SIZE
+
+    // Player settings
+    public static final int PLAYER_SPEED = 4;
+
+    // Game states
+    public static final int MAIN_MENU = 0;
+    public static final int PLAYING = 1;
+    public static final int PAUSED = 2;
+    public static final int GAME_OVER = 3;
 
 }

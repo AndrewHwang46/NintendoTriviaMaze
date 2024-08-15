@@ -3,80 +3,197 @@ package Model;
 import javax.imageio.ImageIO;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.Serializable;
 import java.util.Scanner;
-
-import java.io.InputStream;
 
 public class Maze implements Serializable {
 
     private static Maze myMazeSingleton;
 
-    private static final int COLUMN_SIZE = 80;
+    private static final int COLUMN_SIZE = 4;
 
-    private static final int ROW_SIZE = 72;
+    private static final int ROW_SIZE = 4;
 
     private Room[][] myMap;
 
     private int myNumberOfColumns;
 
+    private int myEntranceRow;
+
+    private int myEntranceColumn;
+
+    private int myExitRow;
+
+    private int myExitColumn;
+
     private int myNumberOfRows;
+
     private Tiles[] myTile;
 
     public Maze(int theColumns, int theRows) {
         myNumberOfColumns = theColumns;
         myNumberOfRows = theRows;
+        myMap = new Room[myNumberOfRows][myNumberOfColumns];
         mazeInstantiate();
     }
 
 
     public Maze(String theFileName) {
+//        InputStream is = Maze.class.getResourceAsStream(theFileName);
+//        Scanner fileReader = new Scanner(is);
         myNumberOfColumns = COLUMN_SIZE;
         myNumberOfRows = ROW_SIZE;
-        loadMaze(theFileName);
+        //printTempMaze(fileReader);
+        loadMazeFromFile(theFileName);
     }
 
-    public void loadMaze(String theFileName) {
-        try {
-            InputStream inputStream = getClass().getResourceAsStream(theFileName);
-            if (inputStream == null) {
-                throw new FileNotFoundException("File not found: " + theFileName);
+    private void loadMazeFromFile(String theFileName) {
+        try (InputStream is = Maze.class.getResourceAsStream(theFileName);
+             Scanner fileReader = new Scanner(is)) {
+
+            if (is == null) {
+                throw new FileNotFoundException("Resource not found: " + theFileName);
             }
 
-            Scanner scanner = new Scanner(inputStream);
+            int fileRow = fileReader.nextInt();
+            int fileCol = fileReader.nextInt();
+            char[][] tempMaze = new char[(fileRow * 2) + 1][(fileCol * 2) + 1];
 
-            StringBuilder sb = new StringBuilder();
-            while (scanner.hasNextLine()) {
-                String line = scanner.nextLine().trim();
-                if (!line.isEmpty()) {
-                    sb.append(line);
-                    myNumberOfRows++;
+            fileReader.nextLine(); // consume the newline
+            int inputRowCounter = 0;
+            while (fileReader.hasNextLine() && inputRowCounter < tempMaze.length) {
+                String inputRow = fileReader.nextLine();
+                for (int i = 0; i < inputRow.length() && i < tempMaze[inputRowCounter].length; i++) {
+                    tempMaze[inputRowCounter][i] = inputRow.charAt(i);
                 }
-            }
-            myNumberOfColumns = sb.length() / myNumberOfRows;
-
-            scanner.close();
-            inputStream = getClass().getResourceAsStream(theFileName);
-            scanner = new Scanner(inputStream);
-
-
-            myMap = new Room[myNumberOfRows][myNumberOfColumns];
-
-            for (int row = 0; row < myNumberOfRows; row++) {
-                String line = scanner.nextLine().trim();
-                for (int col = 0; col < myNumberOfColumns; col++) {
-                    char roomType = line.charAt(col);
-                    if (roomType != '0') {  // Assuming '0' represents an empty space
-                        myMap[row][col] = new Room();
-                        myMap[row][col].setRandomDoorInRoom();
-                    }
-                }
+                inputRowCounter++;
             }
 
-            scanner.close();
+            createMazeFromTemp(tempMaze);
         } catch (FileNotFoundException e) {
-            System.err.println("Error loading maze: " + e.getMessage());
-            throw new RuntimeException("Failed to load maze", e);
+            System.err.println("Error: Maze file not found - " + e.getMessage());
+            initializeEmptyMaze();
+        } catch (IOException e) {
+            System.err.println("Error reading maze file: " + e.getMessage());
+            initializeEmptyMaze();
+        } catch (Exception e) {
+            System.err.println("Unexpected error loading maze: " + e.getMessage());
+            initializeEmptyMaze();
+        }
+    }
+
+    private void createMazeFromTemp(char[][] theTempMaze) {
+        int mazeRow = -1;
+        for (int i = 0; i < theTempMaze.length; i++) {
+            boolean rowHasRooms = false;
+            int mazeColCount = -1;
+            for (int j = 0; j < theTempMaze[0].length; j++) {
+                char charGrab = theTempMaze[i][j];
+                switch (charGrab) {
+                    case '□':
+                        if (!rowHasRooms) {
+                            mazeRow++;
+                        }
+                        rowHasRooms = true;
+                        mazeColCount++;
+                        myMap[mazeRow][mazeColCount] = new Room();
+                        break;
+                    case '!':
+                        if (!rowHasRooms) {
+                            mazeRow++;
+                        }
+                        rowHasRooms = true;
+                        mazeColCount++;
+                        myMap[mazeRow][mazeColCount] = new Room();
+                        myEntranceRow = mazeRow;
+                        myEntranceColumn = mazeColCount;
+                        break;
+                    case '#':
+                        if (!rowHasRooms) {
+                            mazeRow++;
+                        }
+                        rowHasRooms = true;
+                        mazeColCount++;
+                        myMap[mazeRow][mazeColCount] = new Room();
+                        myExitRow = mazeRow;
+                        myExitColumn = mazeColCount;
+                        break;
+                }
+            }
+        }
+    }
+
+//    public void printTempMaze (Scanner theScanner) {
+//        int fileRow, fileCol;
+//        fileRow = theScanner.nextInt();
+//        fileCol = theScanner.nextInt();
+//        char[][] tempMaze = new char[(fileRow * 2) + 1][(fileCol * 2) + 1];
+//        String inputRow;
+//        theScanner.nextLine();
+//        int inputRowCounter = -1;
+//        while (theScanner.hasNextLine()) {
+//            inputRow = theScanner.nextLine();
+//            inputRowCounter++;
+//            for (int i = 0; i < inputRow.length(); i++) {
+//                tempMaze[inputRowCounter][i] = inputRow.charAt(i);
+//            }
+//        }
+//        loadToMyMaze(tempMaze);
+//    }
+//
+//
+//
+//    private void loadToMyMaze(char[][] theTempMaze) {
+//        int mazeRow = -1;
+//        for (int i = 0; i < theTempMaze.length; i++) {
+//            boolean rowHasRooms = false;
+//            int mazeColCount = -1;
+//            for (int j = 0; j < theTempMaze[0].length; j++) {
+//                char charGrab = theTempMaze[i][j];
+//                switch (charGrab) {
+//                    case '□' -> {
+//                        if (!rowHasRooms) {
+//                            mazeRow++;
+//                        }
+//                        mazeColCount++;
+//                        rowHasRooms = true;
+//                        myMap[mazeRow][mazeColCount] = new Room();
+//                    }
+//                    case '!' -> {
+//                        if (!rowHasRooms) {
+//                            mazeRow++;
+//                        }
+//                        rowHasRooms = true;
+//                        mazeColCount++;
+//                        myMap[mazeRow][mazeColCount] = new Room();
+//                        myEntranceRow = mazeRow;
+//                        myEntranceColumn = mazeColCount;
+//                    }
+//                    case '#' -> {
+//                        if (!rowHasRooms) {
+//                            mazeRow++;
+//                        }
+//                        rowHasRooms = true;
+//                        mazeColCount++;
+//                        myMap[mazeRow][mazeColCount] = new Room();
+//                        myExitRow = mazeRow;
+//                        myExitColumn = mazeColCount;
+//                    }
+//                }
+//            }
+//        }
+//
+//
+//
+//    }
+
+    private void initializeEmptyMaze() {
+        myMap = new Room[myNumberOfRows][myNumberOfColumns];
+        for (int i = 0; i < myNumberOfRows; i++) {
+            for (int j = 0; j < myNumberOfColumns; j++) {
+                myMap[i][j] = new Room();
+            }
         }
     }
 
@@ -91,7 +208,7 @@ public class Maze implements Serializable {
             }
         }
     }
-                                                //FINISH TILES
+    //FINISH TILES
     public void getTileImage() {
         for (int i = 0; i < 16; i++) {
             myTile[i] = new Tiles();
@@ -101,7 +218,7 @@ public class Maze implements Serializable {
             myTile[0].setMyCollision(true);
             myTile[1].setTileImage(ImageIO.read(getClass().getResourceAsStream("View/Sprites/Tiles/Brown.png")));
             myTile[2].setMyTileImage(ImageIO.read(getClass().getResourceAsStream("/res/tiles/bottom_wallV3.png")));
-//          myTile[3].setMyTileImage(ImageIO.read());
+    //          myTile[3].setMyTileImage(ImageIO.read());
 
 
         } catch (IOException e) {
@@ -120,7 +237,7 @@ public class Maze implements Serializable {
         return myMap[0].length;
     }
 
-    public static synchronized void resetMaze(String theFileName) {
+    public static synchronized void resetMaze(String theFileName){
         myMazeSingleton = new Maze(theFileName);
     }
 
@@ -140,10 +257,11 @@ public class Maze implements Serializable {
         this.myNumberOfRows = myNumberOfRows;
     }
 
-    public static synchronized Maze getMazeSingleton(String theFileName) {
+    public static synchronized Maze getMazeSingleton(String theFileName){
         if (myMazeSingleton == null) {
             myMazeSingleton = new Maze(theFileName);
         }
+
         return myMazeSingleton;
     }
 
@@ -153,3 +271,4 @@ public class Maze implements Serializable {
 
 
 }
+

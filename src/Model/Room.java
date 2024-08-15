@@ -1,9 +1,7 @@
 package Model;
 
 import java.io.Serializable;
-import java.util.ArrayDeque;
 import java.util.ArrayList;
-import java.util.Queue;
 import java.util.Random;
 
 public class Room implements Serializable {
@@ -22,7 +20,7 @@ public class Room implements Serializable {
         myFactory = new Factory();
         myDoorInRoomList = new AbstractDoor[MAX_ROOM];
         myDoorTotalList = new ArrayList<>(myFactory.getListOfDoors());
-
+        setRandomDoorInRoom();
     }
 
     public void setRandomDoorInRoom() {

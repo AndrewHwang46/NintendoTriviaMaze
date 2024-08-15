@@ -5,13 +5,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="da237305-dc50-476f-be05-0e4cf7d4b99d" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/View/GamePanel.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/View/Sprites/Map/MazeTest" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/NintendoTriviaMaze.iml" beforeDir="false" afterPath="$PROJECT_DIR$/NintendoTriviaMaze.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Controler/Driver.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Controler/Driver.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Model/GameSaveAndLoad.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/GameSaveAndLoad.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Model/GameSettings.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/GameSettings.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Model/Maze.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Maze.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Model/Player.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Player.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Model/Room.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Room.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/View/Game.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/View/Game.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/View/GameFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/View/GameFrame.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/View/PauseMenu.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/View/Sprites/Test" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/View/GamePanel.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/View/GamePanel.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/View/MainMenuGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/View/MainMenuGUI.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -34,12 +40,27 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitHubPullRequestSearchHistory">{
+  &quot;lastFilter&quot;: {
+    &quot;state&quot;: &quot;OPEN&quot;,
+    &quot;assignee&quot;: &quot;AndrewHwang46&quot;
+  }
+}</component>
+  <component name="GithubPullRequestsUISettings">{
+  &quot;selectedUrlAndAccountId&quot;: {
+    &quot;url&quot;: &quot;https://github.com/AndrewHwang46/NintendoTriviaMaze.git&quot;,
+    &quot;accountId&quot;: &quot;06b9eae9-669a-4439-8961-7a971290cc60&quot;
+  }
+}</component>
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
   <component name="ProjectCodeStyleSettingsMigration">
     <option name="version" value="2" />
   </component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 7
+}</component>
   <component name="ProjectId" id="2jLFuMdDfMnZE7Co7LRAPizuP2a" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
@@ -50,6 +71,10 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Application.Answers.executor": "Debug",
+    "Application.Driver.executor": "Run",
+    "Application.GameGui.executor": "Run",
+    "Application.MainMenuGUI.executor": "Run",
     "Downloaded.Files.Path.Enabled": "false",
     "Repository.Attach.Annotations": "false",
     "Repository.Attach.JavaDocs": "false",
@@ -58,10 +83,13 @@
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "SHARE_PROJECT_CONFIGURATION_FILES": "true",
     "WebServerToolWindowFactoryState": "false",
+    "git-widget-placeholder": "main",
+    "kotlin-language-version-configured": "true",
     "last_opened_file_path": "C:/Users/Semper_Jazz/Documents/GitHub/NintendoTriviaMaze/sqlite-jdbc-3.46.0.0.jar",
     "node.js.detected.package.eslint": "true",
     "node.js.selected.package.eslint": "(autodetect)",
     "node.js.selected.package.tslint": "(autodetect)",
+    "nodejs_package_manager_path": "npm",
     "project.structure.last.edited": "Libraries",
     "project.structure.proportion": "0.0",
     "project.structure.side.proportion": "0.2",
@@ -78,7 +106,33 @@
       <recent name="View" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.MainMenuGUI">
+  <component name="RunManager" selected="Application.Driver">
+    <configuration name="Answers" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Model.Answers" />
+      <module name="NintendoTriviaMaze" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="Model.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
+    <configuration name="Driver" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="Controler.Driver" />
+      <module name="NintendoTriviaMaze" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="Controler.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="GameGui" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="View.GameGui" />
       <module name="NintendoTriviaMaze" />
@@ -107,10 +161,20 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.MainMenuGUI" />
+        <item itemvalue="Application.Driver" />
+        <item itemvalue="Application.Answers" />
         <item itemvalue="Application.GameGui" />
+        <item itemvalue="Application.MainMenuGUI" />
       </list>
     </recent_temporary>
+  </component>
+  <component name="SharedIndexes">
+    <attachedChunks>
+      <set>
+        <option value="bundled-jdk-9f38398b9061-39b83d9b5494-intellij.indexing.shared.core-IU-241.18034.62" />
+        <option value="bundled-js-predefined-1d06a55b98c1-0b3e54e931b4-JavaScript-IU-241.18034.62" />
+      </set>
+    </attachedChunks>
   </component>
   <component name="SpellCheckerSettings" RuntimeDictionaries="0" Folders="0" CustomDictionaries="0" DefaultDictionary="application-level" UseSingleDictionary="true" transferred="true" />
   <component name="TaskManager">
@@ -124,10 +188,27 @@
       <workItem from="1721675349686" duration="4685000" />
       <workItem from="1722273453264" duration="277000" />
       <workItem from="1723254204892" duration="18776000" />
+      <workItem from="1723648825459" duration="252000" />
+      <workItem from="1723649822917" duration="113000" />
+      <workItem from="1723650045063" duration="28000" />
+      <workItem from="1723650142307" duration="7330000" />
+      <workItem from="1723658902823" duration="4793000" />
+      <workItem from="1723677574714" duration="10308000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" type="java-line">
+          <url>file://$PROJECT_DIR$/src/Controler/Driver.java</url>
+          <line>9</line>
+          <option name="timeStamp" value="1" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
   </component>
 </project>

@@ -183,10 +183,48 @@ final class AnswerAndQuestionsDBTest {
         assertEquals(expected, sb.toString());
     }
 
+    /**
+     * shortQuestionsTest() method checks if the TorF table exists
+     * and the appropriate values are inserted correctly.
+     */
     @Test
     void shortQuestionsTest() {
-        final String expected = "";
+        final String expected = "What was the name of the lizard/dragon Mario rides? Yoshi\n" +
+                "What did Donkey Kong throw in the Mario vs. Donkey Kong game? Barrel\n" +
+                "What color is Yoshi? Green\n" +
+                "What color is Waluigi Purple\n" +
+                "What is the name of the owner of Nook's Homes in Animal Crossing New Leaf? Tom Nook\n" +
+                "What animal is Tom Nook? Raccon\n" +
+                "What is the general color of zero-suit Samus? Blue\n" +
+                "How is Mario trying to save in Super Mario Odyssey? Peach\n" +
+                "What is the name of the red Toadstool? Toad\n" +
+                "What is the name of the pink Toadstool? Toadette\n" +
+                "What Pokemon was Ash's first Pokemon? Pikachu\n" +
+                "Who is the main antagonist in the Kirby games? King Dedede\n" +
+                "What is the name of the protagonist in the Zelda games? Link\n" +
+                "What Pokemon was the fire starter in the 3rd generation of Pokemon? Torchic\n";
 
+        final String query = "SELECT *" +
+                             "FROM shortQuestions;";
 
+        StringBuilder sb = new StringBuilder();
+
+        try (Connection conn = myDataSource.getConnection();
+             Statement stmt = conn.createStatement()) {
+            ResultSet rs = stmt.executeQuery(query);
+
+            while (rs.next()) {
+                String shortAnswer = rs.getString("shortAnswer");
+                String shortPrompt = rs.getString("shortPrompt");
+
+                sb.append(shortPrompt);
+                sb.append(" ");
+                sb.append(shortAnswer);
+                sb.append("\n");
+            }
+        } catch (final SQLException e) {
+            System.out.println("Unable to query" + e.getMessage() + e.getErrorCode());
+        }
+        assertEquals(expected, sb.toString());
     }
 }

@@ -30,18 +30,20 @@ public final class GameSaveAndLoad {
     }
 
     public boolean saveGame() {
-        mySaved = true;
+        boolean saved = true;
         try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(FILE_NAME))) {
             out.writeObject(myMaze);
             out.writeObject(myPlayer);
-            return true;
+            mySaved = saved;
         } catch (IOException e) {
             System.err.println("Error saving game: " + e.getMessage());
-            return false;
+            saved =  false;
         }
+        return saved;
     }
 
     public boolean loadGame() {
+        boolean load = true;
         try (ObjectInputStream in = new ObjectInputStream(new FileInputStream(FILE_NAME))) {
             Maze loadedMaze = (Maze) in.readObject();
             Player loadedPlayer = (Player) in.readObject();
@@ -53,12 +55,11 @@ public final class GameSaveAndLoad {
             // Update local references
             this.myMaze = loadedMaze;
             this.myPlayer = Player.getInstance();
-
-            return true;
         } catch (IOException | ClassNotFoundException e) {
             System.err.println("Error loading game: " + e.getMessage());
-            return false;
+            load = false;
         }
+        return load;
     }
 
     public Maze getMaze() {

@@ -27,7 +27,7 @@ final class AnswerAndQuestionsDBTest {
     private SQLiteDataSource myDataSource;
 
     @BeforeEach
-    void setup() {
+    void setUp() {
         AnswersAndQuestionsDB database = new AnswersAndQuestionsDB();
         this.myDataSource = database.getDataSource();
         database.getOriginalTables(this.myDataSource);
@@ -58,7 +58,7 @@ final class AnswerAndQuestionsDBTest {
                 "Who said the phrase, \"Let's get fired up!,\" in Super Smash Bros. Ultimate? Wii Fit Trainer\n";
 
         String query = "SELECT *" +
-                       "FROM questionsMultiple;";
+                "FROM questionsMultiple;";
 
         StringBuilder sb = new StringBuilder();
 
@@ -106,7 +106,7 @@ final class AnswerAndQuestionsDBTest {
                 "Wii Fit Trainer Pokemon Trainer Captain Falcon Sheik\n";
 
         String query = "SELECT *" +
-                       "FROM answersMultiple;";
+                "FROM answersMultiple;";
 
         StringBuilder sb = new StringBuilder();
 
@@ -159,7 +159,7 @@ final class AnswerAndQuestionsDBTest {
                 "Is Mario Kart: Super Circuit the first Mario Kart video game? False True\n";
 
         final String query = "SELECT *" +
-                             "FROM TorF;";
+                "FROM TorF;";
 
         StringBuilder sb = new StringBuilder();
 

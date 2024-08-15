@@ -284,15 +284,4 @@ public class GameFrame extends JFrame implements ActionListener {
         myStatusGUI.updateScore(score);
     }
 
-    public void updateRemainingQuestions(int remaining) {
-        myStatusGUI.updateRemainingQuestions(remaining);
-    }
-
-//    public static void main(String[] args) {
-//        SwingUtilities.invokeLater(() -> {
-//            GameFrame game = new GameFrame();
-//            game.setVisible(true);
-//        });
-//    }
-
 }

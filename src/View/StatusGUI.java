@@ -8,15 +8,19 @@ import java.awt.*;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
+/**
+ * Status
+ *
+ * @author Andrew Hwang
+ * @version 1
+ */
 public class StatusGUI extends JPanel implements PropertyChangeListener {
-    private JLabel scoreLabel;
-    private JLabel remainingQuestionsLabel;
-    private JLabel levelLabel;
-    private JProgressBar healthBar;
-    private Player player;
+    private JLabel myScoreLabel;
+    private JLabel myLevelLabel;
+    private Player myPlayer;
 
     public StatusGUI(Player player) {
-        this.player = player;
+        this.myPlayer = player;
         setPreferredSize(new Dimension(GameSettings.SCREEN_WIDTH, 40));
         setBackground(new Color(50, 50, 50));
         setLayout(new FlowLayout(FlowLayout.LEFT, 20, 10));
@@ -28,27 +32,18 @@ public class StatusGUI extends JPanel implements PropertyChangeListener {
     }
 
     private void initComponents() {
-        scoreLabel = new JLabel("Score: 0");
-        remainingQuestionsLabel = new JLabel("Questions: 0");
-        levelLabel = new JLabel("Level: 1");
+        myScoreLabel = new JLabel("Score: " + myPlayer.getMyScore());
 
-        add(scoreLabel);
-        add(remainingQuestionsLabel);
-        add(levelLabel);
+        add(myScoreLabel);
     }
 
     private void styleComponents() {
         Font labelFont = new Font("Arial", Font.BOLD, 14);
         Color textColor = new Color(200, 200, 200);
 
-        scoreLabel.setFont(labelFont);
-        scoreLabel.setForeground(textColor);
-
-        remainingQuestionsLabel.setFont(labelFont);
-        remainingQuestionsLabel.setForeground(textColor);
-
-        levelLabel.setFont(labelFont);
-        levelLabel.setForeground(textColor);
+        myScoreLabel.setFont(labelFont);
+        myScoreLabel.setForeground(textColor);
+        
 
     }
 
@@ -58,25 +53,11 @@ public class StatusGUI extends JPanel implements PropertyChangeListener {
             case "score":
                 updateScore((Integer) evt.getNewValue());
                 break;
-            case "remainingQuestions":
-                updateRemainingQuestions((Integer) evt.getNewValue());
-                break;
-            case "level":
-                updateLevel((Integer) evt.getNewValue());
-                break;
         }
     }
 
     public void updateScore(int score) {
-        scoreLabel.setText("Score: " + score);
-    }
-
-    public void updateRemainingQuestions(int remaining) {
-        remainingQuestionsLabel.setText("Questions: " + remaining);
-    }
-
-    public void updateLevel(int level) {
-        levelLabel.setText("Level: " + level);
+        myScoreLabel.setText("Score: " + score);
     }
 
 }

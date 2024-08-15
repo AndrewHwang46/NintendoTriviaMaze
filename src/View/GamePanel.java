@@ -160,9 +160,9 @@ public class GamePanel extends JPanel implements Runnable, ActionListener {
 
     private void checkAnswer() {
         AbstractDoor door = myCurrentRoom.getMyDoorInRoomList()[0]; // Assuming we're checking the first door
-        boolean correct = myAnswerField.getText().equalsIgnoreCase(door.getAnswer());
-        myPlayer.scoreChanger(correct);
-        door.setStateOfDoor(!correct);
+        boolean playerAnswer = myAnswerField.getText().equalsIgnoreCase(door.getAnswer());
+        myPlayer.scoreChanger(playerAnswer);
+        door.setStateOfDoor(!playerAnswer);
         door.setUserAttempted(true);
 
         myQuestionArea.setVisible(false);

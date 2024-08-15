@@ -141,6 +141,7 @@ public class GameFrame extends JFrame implements ActionListener {
         add(contentPanel, BorderLayout.CENTER);
 
         initComponents();
+        initMenuBar();
 
         pack();
         setLocationRelativeTo(null);

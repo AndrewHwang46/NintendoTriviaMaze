@@ -12,15 +12,18 @@ public final class GameSaveAndLoad {
     private static final String FILE_NAME = "saveGame.ser";
     private static final String MAZE_FILE_NAME = "ScaleDownMaze.txt";
 
+    private Boolean mySaved;
     private Maze myMaze;
     private Player myPlayer;
 
     public GameSaveAndLoad() {
+        mySaved = false;
         this.myMaze = new Maze(MAZE_FILE_NAME);
         this.myPlayer = Player.getInstance();
     }
 
     public boolean saveGame() {
+        mySaved = true;
         try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(FILE_NAME))) {
             out.writeObject(myMaze);
             out.writeObject(myPlayer);
@@ -57,5 +60,8 @@ public final class GameSaveAndLoad {
 
     public Player getPlayer() {
         return myPlayer;
+    }
+    public Boolean getSaved() {
+        return mySaved;
     }
 }

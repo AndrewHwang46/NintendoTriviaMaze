@@ -65,6 +65,7 @@ public final class AnswerAndQuestionsDBTest {
             e.printStackTrace();
         }
         System.out.println(sb);
+        System.out.println(expected);
     }
 
     @Test

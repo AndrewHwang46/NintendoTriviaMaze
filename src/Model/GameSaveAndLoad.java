@@ -12,49 +12,23 @@ import java.io.*;
  *
  * @author Noah Ogilvie
  * @author Andrew Hwang
- * @version 3.0
+ * @version 2.0
  */
 public final class GameSaveAndLoad {
 
-    /**
-     * String constant that is the game's load and save
-     * file name.
-     */
     private static final String FILE_NAME = "saveGame.ser";
-
-    /**
-     * String constant that is a file for the Maze constructor.
-     */
     private static final String MAZE_FILE_NAME = "ScaleDownMaze.txt";
 
-    /**
-     * mySaved is a boolean private field.
-     */
     private Boolean mySaved;
-
-    /**
-     * myMaze is a Maze private field.
-     */
     private Maze myMaze;
-
-    /**
-     * myPlayer is a Player private field.
-     */
     private Player myPlayer;
 
-    /**
-     * GameSaveAndLoad() constructor initializes the global private fields.
-     */
     public GameSaveAndLoad() {
         mySaved = false;
         this.myMaze = new Maze(MAZE_FILE_NAME);
         this.myPlayer = Player.getInstance();
     }
 
-    /**
-     * saveGame() uses serialization to save the Maze and Player.
-     * @return whether if the game has happened to be saved or not.
-     */
     public boolean saveGame() {
         boolean saved = true;
         try (ObjectOutputStream out = new ObjectOutputStream(new FileOutputStream(FILE_NAME))) {
@@ -68,10 +42,6 @@ public final class GameSaveAndLoad {
         return saved;
     }
 
-    /**
-     * loadGame() uses deserialization to load the MAze and Player.
-     * @return whether if the game has happened to load or not.
-     */
     public boolean loadGame() {
         boolean load = true;
         try (ObjectInputStream in = new ObjectInputStream(new FileInputStream(FILE_NAME))) {
@@ -92,26 +62,13 @@ public final class GameSaveAndLoad {
         return load;
     }
 
-    /**
-     * getMaze() gets the Maze object.
-     * @return the Maze object.
-     */
     public Maze getMaze() {
         return myMaze;
     }
 
-    /**
-     * getPlayer() gets the Player object.
-     * @return the Player object.
-     */
     public Player getPlayer() {
         return myPlayer;
     }
-
-    /**
-     * getSaved() gets whether if the game got saved or not.
-     * @return the boolean value of mySaved.
-     */
     public Boolean getSaved() {
         return mySaved;
     }

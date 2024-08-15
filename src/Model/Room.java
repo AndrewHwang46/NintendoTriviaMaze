@@ -1,3 +1,7 @@
+/*
+ * T CSS 360 - Summer 2024
+ * Nintendo Trivia Maze
+ */
 package Model;
 
 import java.io.Serializable;

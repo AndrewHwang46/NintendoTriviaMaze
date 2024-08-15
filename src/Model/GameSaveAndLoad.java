@@ -12,7 +12,7 @@ import java.io.*;
  *
  * @author Noah Ogilvie
  * @author Andrew Hwang
- * @version 2.0
+ * @version 3.0
  */
 public final class GameSaveAndLoad {
 

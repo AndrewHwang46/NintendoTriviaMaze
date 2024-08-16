@@ -7,23 +7,43 @@ package Model;
 import java.io.*;
 
 /**
- * GameSaveAndLoad class
+ * GameSaveAndLoad class uses serialization and deserialization
+ * for the save and load.
  *
  * @author Noah Ogilvie
  * @author Andrew Hwang
- * @version 2.0
+ * @version 3.0
  */
 public final class GameSaveAndLoad {
 
+    /**
+     * String constant that is the game's load and save
+     * file name.
+     */
     private static final String FILE_NAME = "saveGame.ser";
+
+    /**
+     * String constant that is a file for the Maze constructor.
+     */
     private static final String MAZE_FILE_NAME = "ScaleDownMaze.txt";
 
+    /**
+     * mySaved is a boolean private field.
+     */
     private Boolean mySaved;
+
+    /**
+     * myMaze is a Maze private field.
+     */
     private Maze myMaze;
+
+    /**
+     * myPlayer is a Player private field.
+     */
     private Player myPlayer;
 
     /**
-     * This method is a default constructor for GameSaveAndLoad.
+     * GameSaveAndLoad() constructor initializes the global private fields.
      */
     public GameSaveAndLoad() {
         //mySaved = false;
@@ -32,11 +52,8 @@ public final class GameSaveAndLoad {
     }
 
     /**
-     * This method saves the current game state to a file.
-     * This method serializes the current maze and player objects and writes them to a file.
-     * The file name is defined by the FILE_NAME constant.
-     *
-     * @return true if the game was successfully saved, false otherwise
+     * saveGame() uses serialization to save the Maze and Player.
+     * @return whether if the game has happened to be saved or not.
      */
     public boolean saveGame() {
         boolean gameSaved = false;
@@ -52,13 +69,8 @@ public final class GameSaveAndLoad {
     }
 
     /**
-     * This method loads a previously saved game state from a file.
-     * This method deserializes the maze and player objects from a file and updates
-     * the current game state with the loaded data. The file name is defined by the
-     * FILE_NAME constant. If the game is successfully loaded, it updates the singleton
-     * instances of Maze and Player.
-     *
-     * @return true if the game was successfully loaded, false otherwise
+     * loadGame() uses deserialization to load the MAze and Player.
+     * @return whether if the game has happened to load or not.
      */
     public boolean loadGame() {
         boolean gameLoaded = false;
@@ -80,24 +92,24 @@ public final class GameSaveAndLoad {
     }
 
     /**
-     * This method returns the current Maze object.
-     * @return is a maze and is the current Maze object.
+     * getMaze() gets the Maze object.
+     * @return the Maze object.
      */
     public Maze getMaze() {
         return myMaze;
     }
 
     /**
-     * This method returns the current Player object.
-     * @return is a player and is the current Player object.
+     * getPlayer() gets the Player object.
+     * @return the Player object.
      */
     public Player getPlayer() {
         return myPlayer;
     }
 
     /**
-     * This method returns a boolean showing whether the game has been saved.
-     * @return is a boolean and is the save state.
+     * getSaved() gets whether if the game got saved or not.
+     * @return the boolean value of mySaved.
      */
     public Boolean getSaved() {
         return mySaved;

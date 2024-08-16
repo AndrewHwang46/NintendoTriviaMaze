@@ -5,10 +5,7 @@
 package Model;
 
 import javax.imageio.ImageIO;
-import java.io.FileNotFoundException;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.Serializable;
+import java.io.*;
 import java.util.Scanner;
 
 /**
@@ -18,6 +15,12 @@ import java.util.Scanner;
  * @version 1
  */
 public class Maze implements Serializable {
+
+    /**
+     * serialVersionUID is the serializable constant for the implementation of Serializable.
+     */
+    @Serial
+    private static final long serialVersionUID = 1L;
 
     /**
      * myMazeSingleton is an instance Single instance of maze.

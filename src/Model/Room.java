@@ -4,6 +4,7 @@
  */
 package Model;
 
+import java.io.Serial;
 import java.io.Serializable;
 import java.util.Random;
 
@@ -16,6 +17,12 @@ import java.util.Random;
  * @author Andrew Hwang
  */
 public class Room implements Serializable {
+
+    /**
+     * serialVersionUID is the serializable constant for the implementation of Serializable.
+     */
+    @Serial
+    private static final long serialVersionUID = 1L;
 
     /**
      * myRoomMovement is a boolean and is whether the Room has any doors open.

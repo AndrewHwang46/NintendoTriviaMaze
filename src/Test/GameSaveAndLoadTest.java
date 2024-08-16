@@ -8,6 +8,7 @@ import Model.GameSaveAndLoad;
 import Model.Maze;
 import Model.Player;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
 
 /**
  * GameSaveAndLoadTest class tests the GameAndSaveLoad
@@ -47,5 +48,15 @@ final class GameSaveAndLoadTest {
         myGameSaveAndLoad = new GameSaveAndLoad();
         myMaze = new Maze(MAZE_FILE_NAME);
         myPlayer = Player.getInstance();
+    }
+
+    @Test
+    void serializeTest() {
+
+    }
+
+    @Test
+    void deserializeTest() {
+
     }
 }

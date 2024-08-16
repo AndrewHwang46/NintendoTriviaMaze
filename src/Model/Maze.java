@@ -24,10 +24,6 @@ public class Maze implements Serializable {
     @Serial
     private static final long serialVersionUID = 1L;
 
-    /**
-     * myMazeSingleton is an instance Single instance of maze.
-     */
-    private static Maze myMazeSingleton;
 
     /**
      * COLUMN_SIZE is the max size of the column.
@@ -113,6 +109,9 @@ public class Maze implements Serializable {
      * @param theFileName the name of the file resource containing the maze configuration
      */
     private void loadMazeFromFile(String theFileName) {
+        System.out.println("Attempting to load file: " + theFileName);
+        InputStream inputStream = Maze.class.getResourceAsStream(theFileName);
+        System.out.println(inputStream);
         try (InputStream is = Maze.class.getResourceAsStream(theFileName);
              Scanner fileReader = new Scanner(is)) {
 
@@ -159,43 +158,67 @@ public class Maze implements Serializable {
      * @param theTempMaze a 2D character array representing the temporary maze structure
      */
     private void createMazeFromTemp(char[][] theTempMaze) {
+        if (theTempMaze == null || theTempMaze.length == 0 || theTempMaze[0].length == 0) {
+            throw new IllegalArgumentException("Invalid temp maze structure");
+        }
+
+        // Calculate the actual maze dimensions
+        int maxRow = 0;
+        int maxCol = 0;
+        for (int i = 0; i < theTempMaze.length; i++) {
+            for (int j = 0; j < theTempMaze[i].length; j++) {
+                if (theTempMaze[i][j] == '□' || theTempMaze[i][j] == '!' || theTempMaze[i][j] == '#') {
+                    maxRow = Math.max(maxRow, i);
+                    maxCol = Math.max(maxCol, j);
+                }
+            }
+        }
+
+        myNumberOfRows = (maxRow / 2) + 1;
+        myNumberOfColumns = (maxCol / 2) + 1;
+        myMap = new Room[myNumberOfRows][myNumberOfColumns];
+
         int mazeRow = -1;
         for (int i = 0; i < theTempMaze.length; i++) {
             boolean rowHasRooms = false;
             int mazeColCount = -1;
-            for (int j = 0; j < theTempMaze[0].length; j++) {
+            for (int j = 0; j < theTempMaze[i].length; j++) {
                 char charGrab = theTempMaze[i][j];
                 switch (charGrab) {
                     case '□':
-                        if (!rowHasRooms) {
-                            mazeRow++;
-                        }
-                        rowHasRooms = true;
-                        mazeColCount++;
-                        myMap[mazeRow][mazeColCount] = new Room();
-                        break;
                     case '!':
-                        if (!rowHasRooms) {
-                            mazeRow++;
-                        }
-                        rowHasRooms = true;
-                        mazeColCount++;
-                        myMap[mazeRow][mazeColCount] = new Room();
-                        myEntranceRow = mazeRow;
-                        myEntranceColumn = mazeColCount;
-                        break;
                     case '#':
                         if (!rowHasRooms) {
                             mazeRow++;
                         }
                         rowHasRooms = true;
                         mazeColCount++;
+
+                        if (mazeRow >= myNumberOfRows || mazeColCount >= myNumberOfColumns) {
+                            throw new IndexOutOfBoundsException("Calculated maze dimensions are incorrect");
+                        }
+
                         myMap[mazeRow][mazeColCount] = new Room();
-                        myExitRow = mazeRow;
-                        myExitColumn = mazeColCount;
+
+                        if (charGrab == '!') {
+                            myEntranceRow = mazeRow;
+                            myEntranceColumn = mazeColCount;
+                        } else if (charGrab == '#') {
+                            myExitRow = mazeRow;
+                            myExitColumn = mazeColCount;
+                        }
                         break;
                 }
             }
+            System.out.println("Entrance Row: " + myEntranceRow  + "Entrance Column: " + myEntranceColumn + "ExitR: " + myExitRow + "ExitC: " + myExitColumn);
+
+        }
+
+        if (myEntranceRow == -1 || myEntranceColumn == -1) {
+            throw new IllegalStateException("Maze entrance not found");
+        }
+        if (myExitRow == -1 || myExitColumn == -1) {
+            throw new IllegalStateException("Maze exit not found");
         }
     }
 
@@ -254,13 +277,7 @@ public class Maze implements Serializable {
         return myMap[0].length;
     }
 
-    /**
-     *
-     * @param theFileName
-     */
-    public static synchronized void resetMaze(String theFileName){
-        myMazeSingleton = new Maze(theFileName);
-    }
+    
 
     /**
      *
@@ -295,27 +312,12 @@ public class Maze implements Serializable {
     }
 
 
-    /**
-     *This method gets the single instance of maze.
-     * @param theFileName is a string and is the file name loading the maze.
-     * @return is a Maze and is the single instance of maze.
-     */
-    public static synchronized Maze getMazeSingleton(String theFileName){
-        if (myMazeSingleton == null) {
-            myMazeSingleton = new Maze(theFileName);
-        }
+//    /**
+//     *This method gets the single instance of maze.
+//     * @param theFileName is a string and is the file name loading the maze.
+//     * @return is a Maze and is the single instance of maze.
+//     */
 
-        return myMazeSingleton;
-    }
-
-    /**
-     *This method sets the single instance of maze.
-     * @param theMazeSingleton is a maze and is the single instance of maze that is
-     *                         setting myMazeSingleton.
-     */
-    public static synchronized void setMazeSingleton(Maze theMazeSingleton) {
-        myMazeSingleton = theMazeSingleton;
-    }
 
     /**
      * This method gets the entrance row.

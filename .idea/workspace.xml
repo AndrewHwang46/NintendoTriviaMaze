@@ -6,8 +6,6 @@
   <component name="ChangeListManager">
     <list default="true" id="da237305-dc50-476f-be05-0e4cf7d4b99d" name="Changes" comment="fixed issues">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Maze.java" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/Player.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -195,7 +193,6 @@
       <workItem from="1723650142307" duration="7330000" />
       <workItem from="1723658902823" duration="4793000" />
       <workItem from="1723677574714" duration="10308000" />
-      <workItem from="1723782927330" duration="318000" />
     </task>
     <task id="LOCAL-00001" summary="Added javadoc">
       <option name="closed" value="true" />

@@ -6,7 +6,6 @@ package Model;
 
 import java.io.Serial;
 import java.io.Serializable;
-import java.util.Arrays;
 import java.util.Random;
 
 /**
@@ -14,9 +13,11 @@ import java.util.Random;
  * This class holds a holds 4 doors for each room created.
  * This class also hands if the room is locked off.
  *
- * @version 1
+ * Check equals and hashCode methods for comparing different rooms. Very important.
+ *
  * @author Andrew Hwang
  * @author Noah Ogivlie
+ * @version 4
  */
 public class Room implements Serializable {
 
@@ -36,10 +37,10 @@ public class Room implements Serializable {
      */
     private static final int MAX_DOORS = 4;
 
-    /**
-     * myRandom is a random then is used to pick a random door
-     */
-    private final Random myRandom = new Random();
+//    /**
+//     * myRandom is a random then is used to pick a random door
+//     */
+//    private final Random myRandom;
 
     /**
      * myDoorInRoomList is a list of the doors in the room.
@@ -50,7 +51,7 @@ public class Room implements Serializable {
      * myUnusedQuestionList is an instance of QuestionList and is ued to
      * add doors into myDoorInRoomList.
      */
-    private final QuestionsList myUnusedQuestionsList = new QuestionsList();
+    private final QuestionsList myUnusedQuestionsList;
 
 
     /**
@@ -58,7 +59,9 @@ public class Room implements Serializable {
      */
     public Room() {
         myRoomMovement = true;
+        //myRandom = new Random();
         myDoorInRoomList = new AbstractDoor[MAX_DOORS];
+        myUnusedQuestionsList = new QuestionsList();
         setRandomDoorInRoom();
     }
 
@@ -67,9 +70,10 @@ public class Room implements Serializable {
      * the size of the list in QuestionList. Then assigning them into the room.
      */
     public void setRandomDoorInRoom() {
+        Random random = new Random();
         for (int i = 0; i < MAX_DOORS; i++) {
             if (myUnusedQuestionsList.getListSize() != 0) {
-                int index = myRandom.nextInt(myUnusedQuestionsList.getListSize()-1);
+                int index = random.nextInt(myUnusedQuestionsList.getListSize()-1);
                 myDoorInRoomList[i] = myUnusedQuestionsList.getUnusedQuestion(index);
                 myUnusedQuestionsList.removeDuplicates(index);
             }
@@ -135,6 +139,9 @@ public class Room implements Serializable {
     }
 
     /**
+     * NOTE BY NOAH:
+     * Andrew made the Room class to always be random, there is no way to
+     * have equal Rooms.
      * {@inheritDoc}
      */
     @Override
@@ -153,22 +160,23 @@ public class Room implements Serializable {
 
         final Room otherRoom = (Room) theOther;
 
-        return this.myRoomMovement == otherRoom.myRoomMovement &&
-                this.myRandom.equals(otherRoom.myRandom) &&
-                Arrays.equals(this.myDoorInRoomList, otherRoom.myDoorInRoomList) &&
-                this.myUnusedQuestionsList.equals(otherRoom.myUnusedQuestionsList);
+        return this.myRoomMovement == otherRoom.myRoomMovement; //&&
+                //Arrays.equals(myDoorInRoomList, otherRoom.myDoorInRoomList) &&
+                //Objects.equals(myUnusedQuestionsList, otherRoom.myUnusedQuestionsList);
     }
 
     /**
+     * IMPORTANT! By Noah.
+     * Check the warning found in equals().
      * {@inheritDoc}
      */
     @Override
     public int hashCode() {
         int hash = 97;
         hash = 31 * hash + (this.myRoomMovement ? 1 : 0);
-        hash = 31 * hash + this.myRandom.hashCode();
-        hash = 31 * hash + Arrays.hashCode(this.myDoorInRoomList);
-        hash = 31 * hash + this.myUnusedQuestionsList.hashCode();
+        //hash = 31 * hash + this.myRandom.hashCode();
+        //hash = 31 * hash + Arrays.hashCode(this.myDoorInRoomList);
+        //hash = 31 * hash + this.myUnusedQuestionsList.hashCode();
         return hash;
     }
 

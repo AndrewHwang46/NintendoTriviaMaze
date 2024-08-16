@@ -92,7 +92,7 @@ public class Player implements Serializable{
      * by adding the players speed to the y value.
      */
     public void moveUp() {
-        setY(myY + GameSettings.PLAYER_SPEED);
+        setY(myY - GameSettings.PLAYER_SPEED);
     }
 
     /**
@@ -100,7 +100,7 @@ public class Player implements Serializable{
      * by subtracting the players speed to the y value.
      */
     public void moveDown() {
-        setY(myY - GameSettings.PLAYER_SPEED);
+        setY(myY + GameSettings.PLAYER_SPEED);
     }
 
     /**

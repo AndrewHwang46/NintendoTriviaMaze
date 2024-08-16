@@ -9,6 +9,7 @@ public class MainMenuGUI extends JPanel {
     private JLabel myTitleLabel;
     private GameFrame gameFrame;
 
+    // for Jian
     public MainMenuGUI(GameFrame gameFrame) {
         this.gameFrame = gameFrame;
         setLayout(new GridLayout(5, 1, 10, 10));

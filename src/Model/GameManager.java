@@ -12,7 +12,7 @@ public class GameManager {
         maze = new Maze("/Resources/Map/ScaleDownMaze.txt");
         player = Player.getInstance();
     }
-
+    // for Jian
     public Maze getMaze() {
         return maze;
     }

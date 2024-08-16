@@ -45,6 +45,7 @@ public class GameSaveAndLoad {
     public Player getPlayer() {
         return myPlayer;
     }
+    // for Jian
 }
 
 ///*

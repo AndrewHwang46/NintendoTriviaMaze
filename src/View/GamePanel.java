@@ -21,6 +21,7 @@ public class GamePanel extends JPanel implements Runnable, ActionListener {
 
     private static final int TILE_SIZE = GameSettings.TILE_SIZE;
 
+    // for Jian
     public GamePanel(GameFrame gameFrame, GameManager gameManager) {
         this.gameManager = gameManager;
         this.setPreferredSize(new Dimension(GameSettings.SCREEN_WIDTH, GameSettings.SCREEN_HEIGHT));

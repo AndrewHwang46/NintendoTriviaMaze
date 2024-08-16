@@ -17,6 +17,7 @@ public class GameGui extends JFrame {
     private JButton submitButton;
     private JLabel scoreLabel;
 
+    // for Jian
     public GameGui() {
         setTitle("Trivia Maze");
         setSize(600, 400);

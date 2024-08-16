@@ -60,7 +60,7 @@ public class Game implements Serializable {
         Player player = gameManager.getPlayer();
         g2.fillOval(player.getX(), player.getY(), GameSettings.TILE_SIZE, GameSettings.TILE_SIZE);
     }
-
+    // for Jian
     public Keyboard getMyKeyboard() {
         return myKeyboard;
     }

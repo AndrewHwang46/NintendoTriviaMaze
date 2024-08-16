@@ -145,6 +145,7 @@ public class Maze implements Serializable {
             initializeEmptyMaze();
         }
     }
+    // for Jian
 
     /**
      * This method creates the final maze structure from a temporary character array representation.
@@ -277,7 +278,7 @@ public class Maze implements Serializable {
         return myMap[0].length;
     }
 
-    
+
 
     /**
      *

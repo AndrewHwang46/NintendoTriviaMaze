@@ -14,9 +14,10 @@ import java.io.Serializable;
  * and if they have won the game.
  *
  * @author Andrew Hwang
+ * @author Noah Ogilvie
  * @version 1
  */
-public class Player implements Serializable{
+public class Player implements Serializable {
 
     /**
      * serialVersionUID is the serializable constant for the implementation of Serializable.
@@ -220,4 +221,37 @@ public class Player implements Serializable{
         myPCS.addPropertyChangeListener(listener);
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean equals(final Object theOther) {
+        if (this == theOther) {
+            return true;
+        }
+        if (theOther == null) {
+            return false;
+        }
+        if (!(theOther instanceof Player)) {
+            return false;
+        }
+        final Player otherPlayer = (Player) theOther;
+        return this.myX == otherPlayer.myX &&
+                this.myY == otherPlayer.myY &&
+                this.myScore == otherPlayer.myScore &&
+                this.myWin == otherPlayer.myWin;
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public int hashCode() {
+        int hash = 97;
+        hash = 31 * hash + this.myX;
+        hash = 31 * hash + this.myY;
+        hash = 31 * hash + this.myScore;
+        hash = 31 * hash + (this.myWin ? 1 : 0);
+        return hash;
+    }
 }

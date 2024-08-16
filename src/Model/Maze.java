@@ -204,7 +204,6 @@ public class Maze implements Serializable {
                         break;
                 }
             }
-            System.out.println("Entrance Row: " + myEntranceRow  + "Entrance Column: " + myEntranceColumn + "ExitR: " + myExitRow + "ExitC: " + myExitColumn);
 
         }
 

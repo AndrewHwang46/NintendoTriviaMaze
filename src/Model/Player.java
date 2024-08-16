@@ -58,7 +58,7 @@ public class Player implements Serializable {
     /**
      * This is the constructor for the player class.
      */
-    private Player() {
+    public Player() {
         myX = GameSettings.SCREEN_WIDTH/2 - (GameSettings.TILE_SIZE/2);
         myY = GameSettings.SCREEN_HEIGHT/2 - (GameSettings.TILE_SIZE/2);
         myScore = 0;

@@ -6,32 +6,54 @@ import View.Keyboard;
 import java.awt.*;
 import java.io.Serializable;
 
+/**
+ * This class manages the gameplay loop, including player movement, room interactions,
+ * and rendering of the game state.
+ *
+ * @author Andrew Hwang
+ * @version 1
+ */
 public class Game implements Serializable {
-    private GameManager gameManager;
+    private GameManager myGameManager;
     private Keyboard myKeyboard;
 
-    public Game(final GamePanel theGamePanel, Keyboard keyboard, GameManager gameManager) {
+    /**
+     * This method constructs a new Game instance.
+     * @param theGamePanel is a GamePanel object for Holding the game.
+     * @param theKeyboard is a Keyboard object for handling user input.
+     * @param theGameManager is a GameManager object for managing game state.
+     */
+    public Game(final GamePanel theGamePanel, Keyboard theKeyboard, GameManager theGameManager) {
         System.out.println("Working Directory = " + System.getProperty("user.dir"));
-        this.gameManager = gameManager;
-        myKeyboard = keyboard;
+        myGameManager = theGameManager;
+        myKeyboard = theKeyboard;
     }
 
+    /**
+     * This method updates the game state based on user input and game rules.
+     */
     public void update() {
         handlePlayerMovement();
         checkRoomInteraction();
     }
 
+    /**
+     * This method handles player movement based on keyboard input.
+     */
     private void handlePlayerMovement() {
-        Player player = gameManager.getPlayer();
+        Player player = myGameManager.getPlayer();
         if (myKeyboard.isMyUpPressed()) player.moveUp();
         if (myKeyboard.isMyDownPressed()) player.moveDown();
         if (myKeyboard.isMyLeftPressed()) player.moveLeft();
         if (myKeyboard.isMyRightPressed()) player.moveRight();
     }
 
+    /**
+     * This method checks and handles player interaction with the current room.
+     */
     private void checkRoomInteraction() {
-        Player player = gameManager.getPlayer();
-        Maze maze = gameManager.getMaze();
+        Player player = myGameManager.getPlayer();
+        Maze maze = myGameManager.getMaze();
         int roomX = player.getX() / GameSettings.TILE_SIZE;
         int roomY = player.getY() / GameSettings.TILE_SIZE;
         Room[][] mazeMap = maze.getMyMap();
@@ -44,28 +66,39 @@ public class Game implements Serializable {
         }
     }
 
-    public void draw(Graphics2D g2) {
+    /**
+     * This method draws the current game state.
+     *
+     * @param theG2 is a Graphics and is what is used to draw.
+     */
+    public void draw(Graphics2D theG2) {
         // Draw maze
-        Room[][] mazeMap = gameManager.getMaze().getMyMap();
+        Room[][] mazeMap = myGameManager.getMaze().getMyMap();
         for (int y = 0; y < mazeMap.length; y++) {
             for (int x = 0; x < mazeMap[y].length; x++) {
                 if (mazeMap[y][x] != null) {
-                    g2.drawRect(x * GameSettings.TILE_SIZE, y * GameSettings.TILE_SIZE,
+                    theG2.drawRect(x * GameSettings.TILE_SIZE, y * GameSettings.TILE_SIZE,
                             GameSettings.TILE_SIZE, GameSettings.TILE_SIZE);
                 }
             }
         }
-
-        // Draw player
-        Player player = gameManager.getPlayer();
-        g2.fillOval(player.getX(), player.getY(), GameSettings.TILE_SIZE, GameSettings.TILE_SIZE);
+        Player player = myGameManager.getPlayer();
+        theG2.fillOval(player.getX(), player.getY(), GameSettings.TILE_SIZE, GameSettings.TILE_SIZE);
     }
-    // for Jian
+
+    /**
+     * This method returns the Keyboard object.
+     * @return is a keyboard.
+     */
     public Keyboard getMyKeyboard() {
         return myKeyboard;
     }
 
-    public void setGameManager(GameManager gameManager) {
-        this.gameManager = gameManager;
+    /**
+     * This method set the given game manager.
+     * @param theGameManager is a GameManager object wanting to be set.
+     */
+    public void setMyGameManager(GameManager theGameManager) {
+        myGameManager = theGameManager;
     }
 }

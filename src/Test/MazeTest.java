@@ -1,8 +1,27 @@
 package Test;
 
+import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+/**
+ * MazeTest class is used to test the functionality of the Maze class.
+ *
+ * @author Noah Ogilvie
+ * @version 1
+ */
 public class MazeTest {
+
+    /**
+     * COLUMN_SIZE is the max size of the column.
+     */
+    private static final int COLUMN_SIZE = 4;
+
+
+
+    @BeforeEach
+    void setUp() {
+
+    }
 
     @Test
     void getMyMap() {

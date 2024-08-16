@@ -32,11 +32,6 @@ public class Room implements Serializable {
     private boolean myRoomMovement;
 
     /**
-     * myFactory is an instance of Factory.
-     */
-    private final transient Factory myFactory;
-
-    /**
      * MAX_DOORS is an int and the max amount of doors in a single room.
      */
     private static final int MAX_DOORS = 4;
@@ -49,21 +44,20 @@ public class Room implements Serializable {
     /**
      * myDoorInRoomList is a list of the doors in the room.
      */
-    private AbstractDoor[] myDoorInRoomList;
+    private final AbstractDoor[] myDoorInRoomList;
 
     /**
      * myUnusedQuestionList is an instance of QuestionList and is ued to
      * add doors into myDoorInRoomList.
      */
-    private transient QuestionsList myUnusedQuestionsList = new QuestionsList();
+    private final QuestionsList myUnusedQuestionsList = new QuestionsList();
 
 
     /**
      * This is the constructor of the Room class.
      */
-    public Room () {
+    public Room() {
         myRoomMovement = true;
-        myFactory = new Factory();
         myDoorInRoomList = new AbstractDoor[MAX_DOORS];
         setRandomDoorInRoom();
     }
@@ -160,7 +154,6 @@ public class Room implements Serializable {
         final Room otherRoom = (Room) theOther;
 
         return this.myRoomMovement == otherRoom.myRoomMovement &&
-                this.myFactory.equals(otherRoom.myFactory) &&
                 this.myRandom.equals(otherRoom.myRandom) &&
                 Arrays.equals(this.myDoorInRoomList, otherRoom.myDoorInRoomList) &&
                 this.myUnusedQuestionsList.equals(otherRoom.myUnusedQuestionsList);
@@ -173,7 +166,6 @@ public class Room implements Serializable {
     public int hashCode() {
         int hash = 97;
         hash = 31 * hash + (this.myRoomMovement ? 1 : 0);
-        hash = 31 * hash + this.myFactory.hashCode();
         hash = 31 * hash + this.myRandom.hashCode();
         hash = 31 * hash + Arrays.hashCode(this.myDoorInRoomList);
         hash = 31 * hash + this.myUnusedQuestionsList.hashCode();

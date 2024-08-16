@@ -7,6 +7,8 @@ package Model;
 
 import org.sqlite.SQLiteDataSource;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -21,7 +23,13 @@ import java.util.List;
  * @author Noah Ogilvie
  * @version 3.0
  */
-public final class Factory {
+public final class Factory implements Serializable {
+
+    /**
+     * serialVersionUID is the serializable constant for the implementation of Serializable.
+     */
+    @Serial
+    private static final long serialVersionUID = 1L;
 
     /**
      * myDataSource is a SQLiteDataSource private field.

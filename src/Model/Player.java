@@ -6,6 +6,7 @@ package Model;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
+import java.io.Serial;
 import java.io.Serializable;
 
 /**
@@ -16,6 +17,12 @@ import java.io.Serializable;
  * @version 1
  */
 public class Player implements Serializable{
+
+    /**
+     * serialVersionUID is the serializable constant for the implementation of Serializable.
+     */
+    @Serial
+    private static final long serialVersionUID = 1L;
 
     /**
      * myPlayerSingleton is an instance Single instance of player.

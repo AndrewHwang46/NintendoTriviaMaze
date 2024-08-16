@@ -12,6 +12,7 @@ import java.util.ArrayList;
  *
  * @version 1
  * @author Andrew Hwang
+ * @author Noah Ogilvie
  */
 public class QuestionsList {
     /**
@@ -65,5 +66,39 @@ public class QuestionsList {
      */
     public int getListSize() {
         return myUnusedQuestion.size();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean equals(final Object theOther) {
+        if (this == theOther) {
+            return true;
+        }
+
+        if (theOther == null) {
+            return false;
+        }
+
+        if (!(theOther instanceof QuestionsList)) {
+            return false;
+        }
+
+        final QuestionsList other = (QuestionsList) theOther;
+
+        return this.myFactory == other.myFactory &&
+                this.myUnusedQuestion.equals(other.myUnusedQuestion);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public int hashCode() {
+        int hash = 97;
+        hash = 31 * hash + this.myFactory.hashCode();
+        hash = 31 * hash + this.myUnusedQuestion.hashCode();
+        return hash;
     }
 }

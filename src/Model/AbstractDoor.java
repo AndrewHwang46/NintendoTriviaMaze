@@ -110,6 +110,9 @@ public abstract class AbstractDoor implements Serializable {
         return this.myQuestion;
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public boolean equals(final Object theOther) {
         if (this == theOther) {
@@ -132,6 +135,9 @@ public abstract class AbstractDoor implements Serializable {
                 this.myQuestion.equals(otherAbstractDoor.myQuestion);
     }
 
+    /**
+     * {@inheritDoc}
+     */
     @Override
     public int hashCode() {
         int hash = 97;

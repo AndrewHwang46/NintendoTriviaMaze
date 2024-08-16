@@ -7,8 +7,6 @@ package Model;
 
 import org.sqlite.SQLiteDataSource;
 
-import java.io.Serial;
-import java.io.Serializable;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -23,13 +21,7 @@ import java.util.List;
  * @author Noah Ogilvie
  * @version 3.0
  */
-public final class Factory implements Serializable {
-
-    /**
-     * serialVersionUID is the serializable constant for the implementation of Serializable.
-     */
-    @Serial
-    private static final long serialVersionUID = 1L;
+public final class Factory {
 
     /**
      * myDataSource is a SQLiteDataSource private field.
@@ -156,5 +148,39 @@ public final class Factory implements Serializable {
         createTrueOrFalseDoors();
         createShortQNADoors();
         return new ArrayList<>(this.myListOfDoors);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean equals(final Object theOther) {
+        if (this == theOther) {
+            return true;
+        }
+
+        if (theOther == null) {
+            return false;
+        }
+
+        if (!(theOther instanceof Factory)) {
+            return false;
+        }
+
+        final Factory other = (Factory) theOther;
+
+        return this.myDataSource == other.myDataSource &&
+                this.myListOfDoors.equals(other.myListOfDoors);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public int hashCode() {
+        int hash = 97;
+        hash = 31 * hash + this.myDataSource.hashCode();
+        hash = 31 * hash + this.myListOfDoors.hashCode();
+        return hash;
     }
 }

@@ -6,12 +6,14 @@ package Model;
 
 import javax.imageio.ImageIO;
 import java.io.*;
+import java.util.Arrays;
 import java.util.Scanner;
 
 /**
  * This class create the maze class where all the rooms are stored.
  *
  * @author Anderw Hwang
+ * @author Noah Ogilvie
  * @version 1
  */
 public class Maze implements Serializable {
@@ -347,6 +349,51 @@ public class Maze implements Serializable {
         return myExitColumn;
     }
 
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean equals(final Object theOther) {
+        if (this == theOther) {
+            return true;
+        }
+
+        if (theOther == null) {
+            return false;
+        }
+
+        if (!(theOther instanceof Maze)) {
+            return false;
+        }
+
+        final Maze other = (Maze) theOther;
+
+        return Arrays.deepEquals(this.myMap, other.myMap) &&
+                this.myNumberOfColumns == other.myNumberOfColumns &&
+                this.myEntranceRow == other.myEntranceRow &&
+                this.myEntranceColumn == other.myEntranceColumn &&
+                this.myExitRow == other.myExitRow &&
+                this.myExitColumn == other.myExitColumn &&
+                this.myNumberOfRows == other.myNumberOfRows &&
+                Arrays.deepEquals(this.myTile, other.myTile);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public int hashCode() {
+        int hash = 97;
+        hash = 31 * hash + Arrays.deepHashCode(this.myMap);
+        hash = 31 * hash + this.myNumberOfColumns;
+        hash = 31 * hash + this.myEntranceRow;
+        hash = 31 * hash + this.myEntranceColumn;
+        hash = 31 * hash + this.myExitRow;
+        hash = 31 * hash + this.myExitColumn;
+        hash = 31 * hash + this.myNumberOfRows;
+        hash = 31 * hash + Arrays.deepHashCode(this.myTile);
+        return hash;
+    }
 
 }
 

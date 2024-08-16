@@ -6,6 +6,7 @@ package Model;
 
 import java.io.Serial;
 import java.io.Serializable;
+import java.util.Arrays;
 import java.util.Random;
 
 /**
@@ -15,6 +16,7 @@ import java.util.Random;
  *
  * @version 1
  * @author Andrew Hwang
+ * @author Noah Ogivlie
  */
 public class Room implements Serializable {
 
@@ -32,7 +34,7 @@ public class Room implements Serializable {
     /**
      * myFactory is an instance of Factory.
      */
-    private final Factory myFactory;
+    private final transient Factory myFactory;
 
     /**
      * MAX_DOORS is an int and the max amount of doors in a single room.
@@ -53,7 +55,7 @@ public class Room implements Serializable {
      * myUnusedQuestionList is an instance of QuestionList and is ued to
      * add doors into myDoorInRoomList.
      */
-    private QuestionsList myUnusedQuestionsList = new QuestionsList();
+    private transient QuestionsList myUnusedQuestionsList = new QuestionsList();
 
 
     /**
@@ -136,6 +138,46 @@ public class Room implements Serializable {
                     .append(myDoorInRoomList[i].getStateOfDoor());
         }
         return roomString.toString();
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public boolean equals(final Object theOther) {
+        if (this == theOther) {
+            return true;
+        }
+
+        if (theOther == null) {
+            return false;
+        }
+
+        if (!(theOther instanceof Room)) {
+            return false;
+        }
+
+        final Room otherRoom = (Room) theOther;
+
+        return this.myRoomMovement == otherRoom.myRoomMovement &&
+                this.myFactory.equals(otherRoom.myFactory) &&
+                this.myRandom.equals(otherRoom.myRandom) &&
+                Arrays.equals(this.myDoorInRoomList, otherRoom.myDoorInRoomList) &&
+                this.myUnusedQuestionsList.equals(otherRoom.myUnusedQuestionsList);
+    }
+
+    /**
+     * {@inheritDoc}
+     */
+    @Override
+    public int hashCode() {
+        int hash = 97;
+        hash = 31 * hash + (this.myRoomMovement ? 1 : 0);
+        hash = 31 * hash + this.myFactory.hashCode();
+        hash = 31 * hash + this.myRandom.hashCode();
+        hash = 31 * hash + Arrays.hashCode(this.myDoorInRoomList);
+        hash = 31 * hash + this.myUnusedQuestionsList.hashCode();
+        return hash;
     }
 
 }

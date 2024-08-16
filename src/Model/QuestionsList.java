@@ -4,6 +4,8 @@
  */
 package Model;
 
+import java.io.Serial;
+import java.io.Serializable;
 import java.util.ArrayList;
 
 /**
@@ -14,11 +16,13 @@ import java.util.ArrayList;
  * @author Andrew Hwang
  * @author Noah Ogilvie
  */
-public class QuestionsList {
+public class QuestionsList implements Serializable {
+
     /**
-     * myFactory is an instance of the Factory class lets you grab the list of question.
+     * serialVersionUID is the serializable constant for the implementation of Serializable.
      */
-    private final Factory myFactory;
+    @Serial
+    private static final long serialVersionUID = 1L;
 
     /**
      *myUnusedQuestion is list of all the unused questions left.
@@ -30,8 +34,8 @@ public class QuestionsList {
      * This method is the constructor for the QuestionList class.
      */
     QuestionsList() {
-        myFactory = new Factory();
-        myUnusedQuestion = new ArrayList<>(myFactory.getListOfDoors());
+        Factory data = new Factory();
+        myUnusedQuestion = new ArrayList<>(data.getListOfDoors());
     }
 
     /**
@@ -87,8 +91,7 @@ public class QuestionsList {
 
         final QuestionsList other = (QuestionsList) theOther;
 
-        return this.myFactory == other.myFactory &&
-                this.myUnusedQuestion.equals(other.myUnusedQuestion);
+        return this.myUnusedQuestion.equals(other.myUnusedQuestion);
     }
 
     /**
@@ -97,7 +100,6 @@ public class QuestionsList {
     @Override
     public int hashCode() {
         int hash = 97;
-        hash = 31 * hash + this.myFactory.hashCode();
         hash = 31 * hash + this.myUnusedQuestion.hashCode();
         return hash;
     }

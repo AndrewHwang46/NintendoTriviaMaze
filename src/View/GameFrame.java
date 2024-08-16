@@ -21,7 +21,6 @@ public class GameFrame extends JFrame implements ActionListener {
     private static final int FRAME_WIDTH = GameSettings.SCREEN_WIDTH;
     private static final int FRAME_HEIGHT = GameSettings.SCREEN_HEIGHT + 30;
 
-    // for Jian
 
     public GameFrame() {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

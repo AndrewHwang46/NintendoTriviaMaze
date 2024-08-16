@@ -6,6 +6,14 @@
   <component name="ChangeListManager">
     <list default="true" id="da237305-dc50-476f-be05-0e4cf7d4b99d" name="Changes" comment="fixed issues">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Model/Maze.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Model/Maze.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Model/Tiles.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/View/AssignTileToObject.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/View/BoundCheck.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/View/GameFrame.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/View/GameFrame.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/View/MainMenuGUI.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/View/MainMenuGUI.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/View/ObjectManager.java" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/View/Terrain.java" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -193,6 +201,7 @@
       <workItem from="1723650142307" duration="7330000" />
       <workItem from="1723658902823" duration="4793000" />
       <workItem from="1723677574714" duration="10308000" />
+      <workItem from="1723838780525" duration="868000" />
     </task>
     <task id="LOCAL-00001" summary="Added javadoc">
       <option name="closed" value="true" />
@@ -234,11 +243,30 @@
       <option name="project" value="LOCAL" />
       <updated>1723777870124</updated>
     </task>
-    <option name="localTasksCounter" value="6" />
+    <task id="LOCAL-00006" summary="fixed issues">
+      <option name="closed" value="true" />
+      <created>1723784422042</created>
+      <option name="number" value="00006" />
+      <option name="presentableId" value="LOCAL-00006" />
+      <option name="project" value="LOCAL" />
+      <updated>1723784422042</updated>
+    </task>
+    <option name="localTasksCounter" value="7" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
     <option name="version" value="3" />
+  </component>
+  <component name="Vcs.Log.Tabs.Properties">
+    <option name="TAB_STATES">
+      <map>
+        <entry key="MAIN">
+          <value>
+            <State />
+          </value>
+        </entry>
+      </map>
+    </option>
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Added javadoc" />

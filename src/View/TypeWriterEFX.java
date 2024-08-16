@@ -5,43 +5,43 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
-public class TypeWriterEFX extends JFrame {
-    private JLabel myTitleLabel;
+public class TypeWriterEFX extends JLabel {
     private Timer timer;
-    private String fullText = "Trivia Maze";
+    private String fullText;
     private int index = 0;
 
-    public TypeWriterEFX() {
-        setTitle("Typewriter Effect Demo");
-        setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        setSize(300, 100);
-        setLayout(new FlowLayout());
-
-        myTitleLabel = new JLabel("", SwingConstants.CENTER);
-        myTitleLabel.setFont(new Font("Arial", Font.BOLD, 24));
-        add(myTitleLabel);
+    public TypeWriterEFX(String text, int horizontalAlignment) {
+        super("", horizontalAlignment);
+        this.fullText = text;
+        setFont(new Font("Arial", Font.BOLD, 24)); // You can customize this
 
         timer = new Timer(100, new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 if (index < fullText.length()) {
-                    myTitleLabel.setText(fullText.substring(0, index + 1));
+                    setText(fullText.substring(0, index + 1));
                     index++;
                 } else {
                     timer.stop();
                 }
             }
         });
+    }
 
+    public void startEffect() {
+        index = 0;
+        setText("");
         timer.start();
     }
 
-    public static void main(String[] args) {
-        SwingUtilities.invokeLater(new Runnable() {
-            @Override
-            public void run() {
-                new TypeWriterEFX().setVisible(true);
-            }
-        });
+    public void stopEffect() {
+        timer.stop();
+        setText(fullText);
+    }
+
+    public void setTypewriterText(String theText) {
+        this.fullText = theText;
+        index = 0;
+        setText("");
     }
 }

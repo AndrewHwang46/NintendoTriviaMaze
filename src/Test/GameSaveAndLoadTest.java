@@ -10,6 +10,8 @@ import Model.Player;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
+import static org.junit.jupiter.api.Assertions.*;
+
 /**
  * GameSaveAndLoadTest class tests the GameAndSaveLoad
  * class functionality
@@ -24,6 +26,8 @@ final class GameSaveAndLoadTest {
      * Maze constructor.
      */
     private static final String MAZE_FILE_NAME = "ScaleDownMaze.txt";
+
+    private static final String FILE_NAME = "saveGame.ser";
 
     /**
      * myMaze is a Maze private field.
@@ -50,13 +54,41 @@ final class GameSaveAndLoadTest {
         myPlayer = Player.getInstance();
     }
 
+    /**
+     * testSaveGame() method checks if the game is saved.
+     */
     @Test
-    void serializeTest() {
-
+    void testSaveGame() {
+        boolean result = myGameSaveAndLoad.saveGame();
+        assertTrue(result);
     }
 
+    /**
+     * testLoadGame() method checks if the game is loaded.
+     */
     @Test
-    void deserializeTest() {
+    void testLoadGame() {
+        boolean result = myGameSaveAndLoad.loadGame();
+        assertTrue(result);
+    }
 
+    /**
+     * testPlayerFromLoad() method checks if the Player objects are the same.
+     */
+    @Test
+    void testPlayerFromLoad() {
+        myGameSaveAndLoad.saveGame();
+        myGameSaveAndLoad.loadGame();
+        assertEquals(myPlayer, myGameSaveAndLoad.getPlayer());
+    }
+
+    /**
+     * testMazeFromLoad() method checks if the Maze objects are the same.
+     */
+    @Test
+    void testMazeFromLoad() {
+        myGameSaveAndLoad.saveGame();
+        myGameSaveAndLoad.loadGame();
+        assertEquals(myMaze, myGameSaveAndLoad.getMaze());
     }
 }

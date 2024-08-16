@@ -27,7 +27,7 @@ public class GameFrame extends JFrame implements ActionListener {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         setResizable(false);
         setTitle("Trivia Maze");
-
+        setIcon();
         gameManager = new GameManager();
 
         cardLayout = new CardLayout();
@@ -176,6 +176,11 @@ public class GameFrame extends JFrame implements ActionListener {
 
     public void updateScore(int score) {
         myStatusGUI.updateScore(score);
+    }
+
+    public void setIcon() {
+        ImageIcon icon = new ImageIcon("src/Resources/NintendoIcon.png");
+        setIconImage(icon.getImage());
     }
 }
 

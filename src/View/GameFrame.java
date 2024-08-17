@@ -7,20 +7,54 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * The GameFrame class represents the main window of the Trivia Maze game.
+ * It manages the game's user interface, including the main menu, game panel, and status display.
+ * This class also handles game state management, starting, resuming, saving, and loading games.
+ */
 public class GameFrame extends JFrame implements ActionListener {
+    /** The game manager responsible for handling game logic and state. */
     private GameManager gameManager;
+
+    /** The menu bar for the game frame. */
     private JMenuBar myMenuBar;
-    private JMenuItem mySaveItem, myLoadItem, myExitItem;
+
+    /** Menu item for saving the game. */
+    private JMenuItem mySaveItem;
+
+    /** Menu item for loading a saved game. */
+    private JMenuItem myLoadItem;
+
+    /** Menu item for exiting the game. */
+    private JMenuItem myExitItem;
+
+    /** Button for resuming the game. */
     private JButton myResumeButton;
+
+    /** Panel containing the main game display. */
     private GamePanel myGamePanel;
+
+    /** GUI component for the main menu. */
     private MainMenuGUI myMainMenuGUI;
+
+    /** GUI component for displaying game status. */
     private StatusGUI myStatusGUI;
+
+    /** Layout manager for switching between different panels. */
     private CardLayout cardLayout;
+
+    /** Panel that contains all the different views (main menu, game panel). */
     private JPanel contentPanel;
 
+    /** The width of the game frame. */
     private static final int FRAME_WIDTH = GameSettings.SCREEN_WIDTH;
+
+    /** The height of the game frame. */
     private static final int FRAME_HEIGHT = GameSettings.SCREEN_HEIGHT + 30;
 
+    /**
+     * Constructs a new GameFrame, initializing the game window and its components.
+     */
 
     public GameFrame() {
         setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -40,7 +74,10 @@ public class GameFrame extends JFrame implements ActionListener {
         setLocationRelativeTo(null);
         setVisible(true);
     }
-
+    /**
+     * Initializes the main components of the game frame, including the game panel, main menu,
+     * and status display.
+     */
     private void initComponents() {
         myGamePanel = new GamePanel(this, gameManager);
         myMainMenuGUI = new MainMenuGUI(this);
@@ -53,7 +90,9 @@ public class GameFrame extends JFrame implements ActionListener {
 
         cardLayout.show(contentPanel, "MainMenu");
     }
-
+    /**
+     * Initializes the menu bar and its items.
+     */
     private void initMenuBar() {
         myMenuBar = new JMenuBar();
 
@@ -73,28 +112,39 @@ public class GameFrame extends JFrame implements ActionListener {
         setJMenuBar(myMenuBar);
         menuBarListener();
     }
-
+    /**
+     * Sets up listeners for menu bar items.
+     */
     private void menuBarListener() {
         mySaveItem.addActionListener(e -> saveGame());
         myLoadItem.addActionListener(e -> loadGame());
         myExitItem.addActionListener(e -> showExitDialog());
     }
-
+    /**
+     * Starts a new game, switching to the game panel and initializing game components.
+     */
     public void startGame() {
         cardLayout.show(contentPanel, "Game");
         myGamePanel.startGame();
         myGamePanel.requestFocusInWindow();
     }
-
+    /**
+     * Resumes a paused game, switching back to the game panel.
+     */
     public void resumeGame() {
         cardLayout.show(contentPanel, "Game");
         myGamePanel.requestFocusInWindow();
     }
 
+    /**
+     *
+     */
     public void returnToMainMenu() {
         cardLayout.show(contentPanel, "MainMenu");
     }
-
+    /**
+     * Saves the current game state.
+     */
     private void saveGame() {
         GameSaveAndLoad gameSaveAndLoad = new GameSaveAndLoad(gameManager.getMaze(),
                 gameManager.getPlayer());
@@ -107,7 +157,9 @@ public class GameFrame extends JFrame implements ActionListener {
                     "Save Game", JOptionPane.ERROR_MESSAGE);
         }
     }
-
+    /**
+     * Loads a previously saved game state.
+     */
     void loadGame() {
         GameSaveAndLoad gameSaveAndLoad = new GameSaveAndLoad();
         boolean loaded = gameSaveAndLoad.loadGame();
@@ -127,13 +179,17 @@ public class GameFrame extends JFrame implements ActionListener {
                     "Load Game", JOptionPane.ERROR_MESSAGE);
         }
     }
-
+    /**
+     * Updates the game state after loading a saved game.
+     */
     private void updateGameState() {
         myGamePanel.setMaze(gameManager.getMaze());
         myGamePanel.setPlayer(gameManager.getPlayer());
         updateScore(gameManager.getPlayer().getMyScore());
     }
-
+    /**
+     * Displays an exit confirmation dialog.
+     */
     private void showExitDialog() {
         int choice = JOptionPane.showConfirmDialog(this,
                 "Are you sure you want to exit the game?",
@@ -145,7 +201,11 @@ public class GameFrame extends JFrame implements ActionListener {
             System.exit(0);
         }
     }
-
+    /**
+     * Displays a game over dialog and handles the player's choice to play again or return to the main menu.
+     *
+     * @param thePlayerWon true if the player won, false otherwise
+     */
     public void showGameOverDialog(boolean thePlayerWon) {
         String message = thePlayerWon ? "Congratulations! You've won the game!" :
                 "Game Over. Better luck next time!";
@@ -161,24 +221,36 @@ public class GameFrame extends JFrame implements ActionListener {
             returnToMainMenu();
         }
     }
-
+    /**
+     * Resets the game to its initial state.
+     */
     private void resetGame() {
         gameManager.resetMaze();
         myGamePanel.resetGame();
         startGame();
     }
-
+    /**
+     * Handles action events, specifically for the resume button.
+     *
+     * @param e the action event
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() == myResumeButton) {
             resumeGame();
         }
     }
-
+    /**
+     * Updates the player's score in the status GUI.
+     *
+     * @param score the new score to display
+     */
     public void updateScore(int score) {
         myStatusGUI.updateScore(score);
     }
-
+    /**
+     * Sets the icon for the game window.
+     */
     public void setIcon() {
         ImageIcon icon = new ImageIcon("src/Resources/NintendoIcon.png");
         setIconImage(icon.getImage());

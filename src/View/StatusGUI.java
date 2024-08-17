@@ -19,8 +19,8 @@ public class StatusGUI extends JPanel implements PropertyChangeListener {
     private JLabel myLevelLabel;
     private Player myPlayer;
 
-    public StatusGUI(Player player) {
-        this.myPlayer = player;
+    public StatusGUI(Player thePlayer) {
+        this.myPlayer = thePlayer;
         setPreferredSize(new Dimension(GameSettings.SCREEN_WIDTH, 40));
         setBackground(new Color(50, 50, 50));
         setLayout(new FlowLayout(FlowLayout.LEFT, 20, 10));
@@ -28,7 +28,7 @@ public class StatusGUI extends JPanel implements PropertyChangeListener {
         initComponents();
         styleComponents();
 
-        player.addPropertyChangeListener(this);
+        thePlayer.addPropertyChangeListener(this);
     }
 
     private void initComponents() {

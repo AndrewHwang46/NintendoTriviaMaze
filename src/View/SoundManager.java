@@ -13,13 +13,19 @@ public class SoundManager {
     private Clip myClip;
     private final String[] mySounds;
 
-
+    /**
+     * This method constructs a new SoundManager.
+     */
     public SoundManager() {
         mySounds= new String[1];
         mySounds[0] = "View/Music/Rolling_Down_the_Street,_in_My_Katamari.mp3";
 
     }
 
+    /**
+     * This Method sets myClip to where the file where the audio is.
+     * @param theFile
+     */
     public void setFile(final int theFile) {
         try {
             InputStream is = getClass().getResourceAsStream(mySounds[theFile]);

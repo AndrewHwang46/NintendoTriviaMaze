@@ -103,7 +103,7 @@ public class Room implements Serializable {
      */
     public void movementAvailable() {
         for (AbstractDoor myArrayOfDoor : myDoorInRoomList) {
-            if (!myArrayOfDoor.getStateOfDoor()) {
+            if (!myArrayOfDoor.getUserAttempted()) {
                 myRoomMovement = false;
             }else {
                 myRoomMovement = true;

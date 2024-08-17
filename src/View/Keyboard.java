@@ -63,31 +63,31 @@ public class Keyboard implements KeyListener, Serializable {
     }
 
 
-    public void setMyUpPressed(boolean myUpPressed) {
-        this.myUpPressed = myUpPressed;
+    public void setMyUpPressed(boolean theUpPressed) {
+        myUpPressed = theUpPressed;
     }
 
     public boolean isMyDownPressed() {
         return myDownPressed;
     }
 
-    public void setMyDownPressed(boolean myDownPressed) {
-        this.myDownPressed = myDownPressed;
+    public void setMyDownPressed(boolean theDownPressed) {
+        myDownPressed = theDownPressed;
     }
 
     public boolean isMyRightPressed() {
         return myRightPressed;
     }
 
-    public void setMyRightPressed(boolean myRightPressed) {
-        this.myRightPressed = myRightPressed;
+    public void setMyRightPressed(boolean theRightPressed) {
+        this.myRightPressed = theRightPressed;
     }
 
     public boolean isMyLeftPressed() {
         return myLeftPressed;
     }
 
-    public void setMyLeftPressed(boolean myLeftPressed) {
-        this.myLeftPressed = myLeftPressed;
+    public void setMyLeftPressed(boolean theLeftPressed) {
+        this.myLeftPressed = theLeftPressed;
     }
 }

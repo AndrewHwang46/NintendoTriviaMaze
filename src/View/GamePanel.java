@@ -8,7 +8,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 public class GamePanel extends JPanel implements Runnable, ActionListener {
-    private GameManager gameManager;
+    private GameManager myGameManager;
     private Thread myGameThread;
     private Game myGame;
     private SoundManager mySound;
@@ -21,13 +21,13 @@ public class GamePanel extends JPanel implements Runnable, ActionListener {
 
     private static final int TILE_SIZE = GameSettings.TILE_SIZE;
 
-    // for Jian
-    public GamePanel(GameFrame gameFrame, GameManager gameManager) {
-        this.gameManager = gameManager;
-        this.setPreferredSize(new Dimension(GameSettings.SCREEN_WIDTH, GameSettings.SCREEN_HEIGHT));
-        this.setBackground(Color.black);
-        this.setDoubleBuffered(true);
-        this.setFocusable(true);
+
+    public GamePanel(GameFrame theGameFrame, GameManager theGameManager) {
+        myGameManager = theGameManager;
+        setPreferredSize(new Dimension(GameSettings.SCREEN_WIDTH, GameSettings.SCREEN_HEIGHT));
+        setBackground(Color.black);
+        setDoubleBuffered(true);
+        setFocusable(true);
 
         setLayout(null);
         initGame();
@@ -37,7 +37,7 @@ public class GamePanel extends JPanel implements Runnable, ActionListener {
         myKeyboard = new Keyboard();
         addKeyListener(myKeyboard);
         mySound = new SoundManager();
-        myGame = new Game(this, myKeyboard, gameManager);
+        myGame = new Game(this, myKeyboard, myGameManager);
         initUI();
     }
 
@@ -68,13 +68,11 @@ public class GamePanel extends JPanel implements Runnable, ActionListener {
     }
 
     private void positionComponents() {
-        // Position door buttons
         myDoorButtons[0].setBounds(GameSettings.SCREEN_WIDTH / 2 - 50, 50, 100, 30);
         myDoorButtons[1].setBounds(GameSettings.SCREEN_WIDTH - 130, GameSettings.SCREEN_HEIGHT / 2 - 15, 100, 30);
         myDoorButtons[2].setBounds(GameSettings.SCREEN_WIDTH / 2 - 50, GameSettings.SCREEN_HEIGHT - 80, 100, 30);
         myDoorButtons[3].setBounds(30, GameSettings.SCREEN_HEIGHT / 2 - 15, 100, 30);
 
-        // Position question components
         myQuestionArea.setBounds(100, 100, GameSettings.SCREEN_WIDTH - 200, 100);
         myAnswerField.setBounds(100, 210, GameSettings.SCREEN_WIDTH - 200, 30);
         mySubmitButton.setBounds(GameSettings.SCREEN_WIDTH / 2 - 50, 250, 100, 30);
@@ -83,10 +81,6 @@ public class GamePanel extends JPanel implements Runnable, ActionListener {
     public void startGame() {
         myGameThread = new Thread(this);
         myGameThread.start();
-    }
-
-    public void resumeGame() {
-        // Implement resume game logic here
     }
 
     @Override
@@ -157,9 +151,9 @@ public class GamePanel extends JPanel implements Runnable, ActionListener {
     }
 
     private void checkAnswer() {
-        AbstractDoor door = myCurrentRoom.getMyDoorInRoomList()[0]; // Assuming we're checking the first door
+        AbstractDoor door = myCurrentRoom.getMyDoorInRoomList()[0];
         boolean playerAnswer = myAnswerField.getText().equalsIgnoreCase(door.getAnswer());
-        gameManager.getPlayer().scoreChanger(playerAnswer);
+        myGameManager.getPlayer().scoreChanger(playerAnswer);
         door.setStateOfDoor(!playerAnswer);
         door.setUserAttempted(true);
 
@@ -185,23 +179,21 @@ public class GamePanel extends JPanel implements Runnable, ActionListener {
     }
 
     public void setMaze(Maze newMaze) {
-        gameManager.setMaze(newMaze);
+        myGameManager.setMaze(newMaze);
         updateMazeDisplay();
         updateCurrentRoom();
     }
 
     public void setPlayer(Player newPlayer) {
-        gameManager.getPlayer().updateState(newPlayer);
+        myGameManager.getPlayer().updateState(newPlayer);
         updatePlayerPosition();
         updatePlayerStats();
     }
 
     private void updateMazeDisplay() {
-        // Clear existing maze display
         removeAll();
 
-        // Redraw the maze based on the new maze object
-        Room[][] mazeMap = gameManager.getMaze().getMyMap();
+        Room[][] mazeMap = myGameManager.getMaze().getMyMap();
         for (int y = 0; y < mazeMap.length; y++) {
             for (int x = 0; x < mazeMap[y].length; x++) {
                 if (mazeMap[y][x] != null) {
@@ -224,9 +216,9 @@ public class GamePanel extends JPanel implements Runnable, ActionListener {
     }
 
     private void updateCurrentRoom() {
-        int roomX = gameManager.getPlayer().getX() / GameSettings.TILE_SIZE;
-        int roomY = gameManager.getPlayer().getY() / GameSettings.TILE_SIZE;
-        myCurrentRoom = gameManager.getMaze().getMyMap()[roomY][roomX];
+        int roomX = myGameManager.getPlayer().getX() / GameSettings.TILE_SIZE;
+        int roomY = myGameManager.getPlayer().getY() / GameSettings.TILE_SIZE;
+        myCurrentRoom = myGameManager.getMaze().getMyMap()[roomY][roomX];
         updateDoorButtons();
     }
 
@@ -244,11 +236,11 @@ public class GamePanel extends JPanel implements Runnable, ActionListener {
     private void updatePlayerStats() {
         if (getParent() instanceof GameFrame) {
             GameFrame parentFrame = (GameFrame) getParent();
-            parentFrame.updateScore(gameManager.getPlayer().getMyScore());
+            parentFrame.updateScore(myGameManager.getPlayer().getMyScore());
         }
     }
     public void resetGame() {
-        gameManager.resetMaze();
+        myGameManager.resetMaze();
         Player.resetPlayer();
         myCurrentRoom = null;
         for (JButton button : myDoorButtons) {
@@ -258,8 +250,8 @@ public class GamePanel extends JPanel implements Runnable, ActionListener {
         myAnswerField.setVisible(false);
         mySubmitButton.setVisible(false);
         updatePlayerPosition();
-        gameManager.getPlayer().setMyScore(0);
-        for (Room[] row : gameManager.getMaze().getMyMap()) {
+        myGameManager.getPlayer().setMyScore(0);
+        for (Room[] row : myGameManager.getMaze().getMyMap()) {
             for (Room room : row) {
                 if (room != null) {
                     for (AbstractDoor door : room.getMyDoorInRoomList()) {
@@ -282,9 +274,9 @@ public class GamePanel extends JPanel implements Runnable, ActionListener {
         repaint();
     }
 
-    public void setGameManager(GameManager gameManager) {
-        this.gameManager = gameManager;
-        myGame.setGameManager(gameManager);
+    public void setMyGameManager(GameManager myGameManager) {
+        myGameManager = myGameManager;
+        myGame.setMyGameManager(myGameManager);
     }
 }
 

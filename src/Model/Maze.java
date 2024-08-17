@@ -4,7 +4,6 @@
  */
 package Model;
 
-import javax.imageio.ImageIO;
 import java.io.*;
 import java.util.Arrays;
 import java.util.Scanner;
@@ -69,11 +68,6 @@ public class Maze implements Serializable {
      *myNumberOfRows is the number of rows.
      */
     private int myNumberOfRows;
-
-    /**
-     *myTile is a list that holds different tiles.
-     */
-    private Tiles[] myTile;
 
     /**
      * This a constructor of Maze if int are given.
@@ -145,7 +139,6 @@ public class Maze implements Serializable {
             initializeEmptyMaze();
         }
     }
-    // for Jian
 
     /**
      * This method creates the final maze structure from a temporary character array representation.
@@ -211,7 +204,6 @@ public class Maze implements Serializable {
                         break;
                 }
             }
-            System.out.println("Entrance Row: " + myEntranceRow  + "Entrance Column: " + myEntranceColumn + "ExitR: " + myExitRow + "ExitC: " + myExitColumn);
 
         }
 
@@ -243,25 +235,6 @@ public class Maze implements Serializable {
         return myMap;
     }
 
-
-    //FINISH TILES
-    public void getTileImage() {
-        for (int i = 0; i < 16; i++) {
-            myTile[i] = new Tiles();
-        }
-        try {
-            myTile[0].setTileImage(ImageIO.read(getClass().getResourceAsStream("View/Sprites/Tiles/Beige.png")));
-            myTile[0].setMyCollision(true);
-            myTile[1].setTileImage(ImageIO.read(getClass().getResourceAsStream("View/Sprites/Tiles/Brown.png")));
-            myTile[2].setMyTileImage(ImageIO.read(getClass().getResourceAsStream("/res/tiles/bottom_wallV3.png")));
-    //          myTile[3].setMyTileImage(ImageIO.read());
-
-
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
     /**
      *
      * @return
@@ -277,7 +250,6 @@ public class Maze implements Serializable {
     public int getMyMazeCols() {
         return myMap[0].length;
     }
-
 
 
     /**
@@ -313,11 +285,6 @@ public class Maze implements Serializable {
     }
 
 
-//    /**
-//     *This method gets the single instance of maze.
-//     * @param theFileName is a string and is the file name loading the maze.
-//     * @return is a Maze and is the single instance of maze.
-//     */
 
 
     /**
@@ -377,8 +344,7 @@ public class Maze implements Serializable {
                 this.myEntranceColumn == other.myEntranceColumn &&
                 this.myExitRow == other.myExitRow &&
                 this.myExitColumn == other.myExitColumn &&
-                this.myNumberOfRows == other.myNumberOfRows &&
-                Arrays.deepEquals(this.myTile, other.myTile);
+                this.myNumberOfRows == other.myNumberOfRows;
     }
 
     /**
@@ -394,7 +360,6 @@ public class Maze implements Serializable {
         hash = 31 * hash + this.myExitRow;
         hash = 31 * hash + this.myExitColumn;
         hash = 31 * hash + this.myNumberOfRows;
-        hash = 31 * hash + Arrays.deepHashCode(this.myTile);
         return hash;
     }
 

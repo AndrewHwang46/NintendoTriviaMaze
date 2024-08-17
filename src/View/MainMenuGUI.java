@@ -4,11 +4,35 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
 
+/**
+ * The MainMenuGUI class represents the main menu of the Trivia Maze game.
+ * It extends JPanel and contains buttons for starting the game, loading a saved game,
+ * viewing instructions, and exiting the game.
+ */
 public class MainMenuGUI extends JPanel {
-    private JButton myStartButton, myLoadButton, myInstructions, myExitButton;
+    /** Button to start a new game. */
+    private JButton myStartButton;
+
+    /** Button to load a saved game. */
+    private JButton myLoadButton;
+
+    /** Button to display game instructions. */
+    private JButton myInstructions;
+
+    /** Button to exit the game. */
+    private JButton myExitButton;
+
+    /** Label displaying the game title. */
     private JLabel myTitleLabel;
+
+    /** Reference to the main GameFrame. */
     private GameFrame gameFrame;
 
+    /**
+     * Constructs a new MainMenuGUI with the specified GameFrame.
+     *
+     * @param theGameFrame The GameFrame that contains this MainMenuGUI
+     */
     public MainMenuGUI(GameFrame theGameFrame) {
         gameFrame = theGameFrame;
         setLayout(new GridLayout(5, 1, 10, 10));
@@ -42,6 +66,13 @@ public class MainMenuGUI extends JPanel {
         add(myExitButton);
     }
 
+    /**
+     * Creates a JButton with the specified text and action listener.
+     *
+     * @param theText The text to display on the button
+     * @param theListener The ActionListener to attach to the button
+     * @return A new JButton instance
+     */
     private JButton createButton(String theText, ActionListener theListener) {
         JButton button = new JButton(theText);
         button.setFont(new Font("Arial", Font.PLAIN, 14));

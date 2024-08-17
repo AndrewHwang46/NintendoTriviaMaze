@@ -7,21 +7,50 @@ import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * The GamePanel class represents the main game panel in the Trivia Maze game.
+ * It handles the game loop, user interface components, and game state updates.
+ */
 public class GamePanel extends JPanel implements Runnable, ActionListener {
+    /** The game manager responsible for handling game logic and state. */
     private GameManager myGameManager;
+
+    /** The thread responsible for running the game loop. */
     private Thread myGameThread;
+
+    /** The main game object. */
     private Game myGame;
+
+    /** Manages sound effects and background music. */
     private SoundManager mySound;
+
+    /** Handles keyboard input. */
     private Keyboard myKeyboard;
+
+    /** Array of buttons representing doors in the current room. */
     private JButton[] myDoorButtons;
+
+    /** Text area for displaying trivia questions. */
     private JTextArea myQuestionArea;
+
+    /** Text field for user to input answers to trivia questions. */
     private JTextField myAnswerField;
+
+    /** Button to submit answers to trivia questions. */
     private JButton mySubmitButton;
+
+    /** The current room the player is in. */
     private Room myCurrentRoom;
 
+    /** The size of each tile in the game. */
     private static final int TILE_SIZE = GameSettings.TILE_SIZE;
 
-
+    /**
+     * Constructs a new GamePanel with the specified GameFrame and GameManager.
+     *
+     * @param theGameFrame The main game frame
+     * @param theGameManager The game manager
+     */
     public GamePanel(GameFrame theGameFrame, GameManager theGameManager) {
         myGameManager = theGameManager;
         setPreferredSize(new Dimension(GameSettings.SCREEN_WIDTH, GameSettings.SCREEN_HEIGHT));
@@ -33,6 +62,9 @@ public class GamePanel extends JPanel implements Runnable, ActionListener {
         initGame();
     }
 
+    /**
+     * Initializes the game components.
+     */
     private void initGame() {
         myKeyboard = new Keyboard();
         addKeyListener(myKeyboard);
@@ -41,6 +73,9 @@ public class GamePanel extends JPanel implements Runnable, ActionListener {
         initUI();
     }
 
+    /**
+     * Initializes the user interface components.
+     */
     private void initUI() {
         myDoorButtons = new JButton[4];
         for (int i = 0; i < 4; i++) {
@@ -67,6 +102,9 @@ public class GamePanel extends JPanel implements Runnable, ActionListener {
         positionComponents();
     }
 
+    /**
+     * Positions the UI components on the panel.
+     */
     private void positionComponents() {
         myDoorButtons[0].setBounds(GameSettings.SCREEN_WIDTH / 2 - 50, 50, 100, 30);
         myDoorButtons[1].setBounds(GameSettings.SCREEN_WIDTH - 130, GameSettings.SCREEN_HEIGHT / 2 - 15, 100, 30);
@@ -78,11 +116,17 @@ public class GamePanel extends JPanel implements Runnable, ActionListener {
         mySubmitButton.setBounds(GameSettings.SCREEN_WIDTH / 2 - 50, 250, 100, 30);
     }
 
+    /**
+     * Starts the game thread.
+     */
     public void startGame() {
         myGameThread = new Thread(this);
         myGameThread.start();
     }
 
+    /**
+     * The main game loop.
+     */
     @Override
     public void run() {
         double drawInterval = 1000000000 / GameSettings.FPS;
@@ -104,6 +148,9 @@ public class GamePanel extends JPanel implements Runnable, ActionListener {
         }
     }
 
+    /**
+     * Updates the game state.
+     */
     private void update() {
         if (myGame != null) {
             myGame.update();
@@ -112,6 +159,11 @@ public class GamePanel extends JPanel implements Runnable, ActionListener {
         }
     }
 
+    /**
+     * Paints the game components.
+     *
+     * @param g The Graphics object to paint on
+     */
     @Override
     protected void paintComponent(Graphics g) {
         super.paintComponent(g);
@@ -122,6 +174,11 @@ public class GamePanel extends JPanel implements Runnable, ActionListener {
         g2.dispose();
     }
 
+    /**
+     * Handles button click events.
+     *
+     * @param e The ActionEvent object
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         if (e.getSource() instanceof JButton) {
@@ -139,6 +196,11 @@ public class GamePanel extends JPanel implements Runnable, ActionListener {
         }
     }
 
+    /**
+     * Displays the question for the selected door.
+     *
+     * @param doorIndex The index of the selected door
+     */
     private void showQuestion(int doorIndex) {
         AbstractDoor door = myCurrentRoom.getMyDoorInRoomList()[doorIndex];
         myQuestionArea.setText(door.getQuestion());
@@ -150,6 +212,9 @@ public class GamePanel extends JPanel implements Runnable, ActionListener {
         }
     }
 
+    /**
+     * Checks the player's answer to the current question.
+     */
     private void checkAnswer() {
         AbstractDoor door = myCurrentRoom.getMyDoorInRoomList()[0];
         boolean playerAnswer = myAnswerField.getText().equalsIgnoreCase(door.getAnswer());
@@ -164,6 +229,11 @@ public class GamePanel extends JPanel implements Runnable, ActionListener {
         enterRoom(myCurrentRoom); // Refresh the room view
     }
 
+    /**
+     * Updates the UI when entering a new room.
+     *
+     * @param room The room being entered
+     */
     private void enterRoom(Room room) {
         myCurrentRoom = room;
         AbstractDoor[] doors = room.getMyDoorInRoomList();
@@ -172,24 +242,42 @@ public class GamePanel extends JPanel implements Runnable, ActionListener {
         }
     }
 
+    /**
+     * Plays background music.
+     *
+     * @param theIndex The index of the music track to play
+     */
     public void musicBackground(final int theIndex) {
         mySound.setFile(theIndex);
         mySound.play();
         mySound.loop();
     }
 
+    /**
+     * Sets a new maze and updates the display.
+     *
+     * @param newMaze The new maze to set
+     */
     public void setMaze(Maze newMaze) {
         myGameManager.setMaze(newMaze);
         updateMazeDisplay();
         updateCurrentRoom();
     }
 
+    /**
+     * Sets a new player and updates the display.
+     *
+     * @param newPlayer The new player to set
+     */
     public void setPlayer(Player newPlayer) {
         myGameManager.getPlayer().updateState(newPlayer);
         updatePlayerPosition();
         updatePlayerStats();
     }
 
+    /**
+     * Updates the maze display.
+     */
     private void updateMazeDisplay() {
         removeAll();
 
@@ -208,6 +296,12 @@ public class GamePanel extends JPanel implements Runnable, ActionListener {
         repaint();
     }
 
+    /**
+     * Creates a panel representing a room in the maze.
+     *
+     * @param room The room to create a panel for
+     * @return A JPanel representing the room
+     */
     private JPanel createRoomPanel(Room room) {
         JPanel panel = new JPanel();
         panel.setPreferredSize(new Dimension(GameSettings.TILE_SIZE, GameSettings.TILE_SIZE));
@@ -215,6 +309,9 @@ public class GamePanel extends JPanel implements Runnable, ActionListener {
         return panel;
     }
 
+    /**
+     * Updates the current room based on the player's position.
+     */
     private void updateCurrentRoom() {
         int roomX = myGameManager.getPlayer().getX() / GameSettings.TILE_SIZE;
         int roomY = myGameManager.getPlayer().getY() / GameSettings.TILE_SIZE;
@@ -222,6 +319,9 @@ public class GamePanel extends JPanel implements Runnable, ActionListener {
         updateDoorButtons();
     }
 
+    /**
+     * Updates the visibility of door buttons based on the current room.
+     */
     private void updateDoorButtons() {
         AbstractDoor[] doors = myCurrentRoom.getMyDoorInRoomList();
         for (int i = 0; i < doors.length; i++) {
@@ -229,16 +329,26 @@ public class GamePanel extends JPanel implements Runnable, ActionListener {
         }
     }
 
+    /**
+     * Updates the player's position on the display.
+     */
     private void updatePlayerPosition() {
         repaint();
     }
 
+    /**
+     * Updates the player's statistics on the display.
+     */
     private void updatePlayerStats() {
         if (getParent() instanceof GameFrame) {
             GameFrame parentFrame = (GameFrame) getParent();
             parentFrame.updateScore(myGameManager.getPlayer().getMyScore());
         }
     }
+
+    /**
+     * Resets the game to its initial state.
+     */
     public void resetGame() {
         myGameManager.resetMaze();
         Player.resetPlayer();
@@ -274,9 +384,13 @@ public class GamePanel extends JPanel implements Runnable, ActionListener {
         repaint();
     }
 
+    /**
+     * Sets a new GameManager and updates the game accordingly.
+     *
+     * @param myGameManager The new GameManager to set
+     */
     public void setMyGameManager(GameManager myGameManager) {
-        myGameManager = myGameManager;
+        this.myGameManager = myGameManager;
         myGame.setMyGameManager(myGameManager);
     }
 }
-

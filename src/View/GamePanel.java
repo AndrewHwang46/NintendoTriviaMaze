@@ -10,6 +10,10 @@ import java.awt.event.ActionListener;
 /**
  * The GamePanel class represents the main game panel in the Trivia Maze game.
  * It handles the game loop, user interface components, and game state updates.
+ *
+ * @author Andrew Hwang
+ * @author Jian Azul
+ * @version 1
  */
 public class GamePanel extends JPanel implements Runnable, ActionListener {
     /** The game manager responsible for handling game logic and state. */

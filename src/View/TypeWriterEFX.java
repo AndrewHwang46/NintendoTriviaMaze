@@ -8,6 +8,9 @@ import java.awt.event.ActionListener;
 /**
  * The TypeWriterEFX class provides a typewriter-like text animation effect for JLabels.
  * It extends JLabel and uses a Timer to gradually reveal text character by character.
+ *
+ * @author Jian Azul
+ * @version 1
  */
 public class TypeWriterEFX extends JLabel {
     /** Timer used to control the typewriter animation. */

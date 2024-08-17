@@ -11,6 +11,10 @@ import java.awt.event.ActionListener;
  * The GameFrame class represents the main window of the Trivia Maze game.
  * It manages the game's user interface, including the main menu, game panel, and status display.
  * This class also handles game state management, starting, resuming, saving, and loading games.
+ *
+ * @author Andrew Hwang
+ * @author Jian Azul
+ * @version 1
  */
 public class GameFrame extends JFrame implements ActionListener {
     /** The game manager responsible for handling game logic and state. */

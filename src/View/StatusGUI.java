@@ -14,6 +14,10 @@ import java.beans.PropertyChangeListener;
  *
  * @author Andrew Hwang
  * @version 1
+ *
+ * @author Andrew Hwang
+ * @author Jian Azul
+ * @version 1
  */
 public class StatusGUI extends JPanel implements PropertyChangeListener {
     /** Label to display the player's current score. */

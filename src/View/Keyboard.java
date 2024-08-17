@@ -8,6 +8,10 @@ import java.io.Serializable;
  * The Keyboard class handles keyboard input for the game.
  * It implements KeyListener to detect key presses and releases,
  * and Serializable to allow saving the keyboard state.
+ *
+ * @author Andrew Hwang
+ * @author Jian Azul
+ * @version 1
  */
 public class Keyboard implements KeyListener, Serializable {
 

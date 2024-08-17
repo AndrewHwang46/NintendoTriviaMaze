@@ -8,6 +8,10 @@ import java.awt.event.ActionListener;
  * The MainMenuGUI class represents the main menu of the Trivia Maze game.
  * It extends JPanel and contains buttons for starting the game, loading a saved game,
  * viewing instructions, and exiting the game.
+ *
+ * @author Andrew Hwang
+ * @author Jian Azul
+ * @version 1
  */
 public class MainMenuGUI extends JPanel {
     /** Button to start a new game. */

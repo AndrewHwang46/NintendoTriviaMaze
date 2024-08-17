@@ -10,6 +10,10 @@ import java.util.Map;
 /**
  * The SoundManager class is responsible for managing and playing audio in the game.
  * It handles loading, storing, and controlling the playback of audio clips.
+ *
+ * @author Andrew Hwang
+ * @author Jian Azul
+ * @version 1
  */
 public class SoundManager {
     /** A map to store loaded sound clips, with their names as keys. */
